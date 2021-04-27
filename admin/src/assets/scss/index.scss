@@ -1,0 +1,5 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import './system.scss';
+//--------------------- Component default -------------------//
+@import "../../component/login/login.scss";
+@import "../../component/homePage/home.scss";

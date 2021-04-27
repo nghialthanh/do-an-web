@@ -1,0 +1,81 @@
+.login{
+    width: 100vw;
+    height: 100vh;
+    padding-left: calc(50vw - 185px);
+    padding-top: 30vh;
+    background-image: url('../../assets/img/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    .login-content{
+        max-width: 370px;
+        width: 100%;
+        background-color: white;
+        border: 1px solid $color-weith-opacity;
+        border-radius: 10px;
+        .login-header{
+            border-bottom: none;
+            padding-top: 60px;
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            span{
+                font-size: 2.5rem;
+                position: absolute;
+                left: -60px;
+                top:-20vh;
+                width: 200%;
+                color: white;
+                font-weight: 700;
+            }
+            .avatar-icon{
+                width: 100px;
+                height: 100px;
+                background-color: $color-weith-opacity;
+                border-radius: 50%;
+                position: absolute;
+                top: -50px;
+                left: calc(50% - 50px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img{
+                    width: 70px;
+                    height: 60px;
+                }
+            }
+        }
+        .login-body{
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            
+            button{
+                width: 100%;
+                background-color: $color-weith;
+                color: white;
+                border-color: $color-weith;
+            }
+            button:hover{
+                background-color: white;
+                color: $color-weith;
+                font-weight: 600;
+            }
+            button:focus{
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+            button:active{
+                -webkit-box-shadow: none ;
+                box-shadow: none ;
+            }
+            .registerButton{
+                &:hover{
+                    cursor: pointer;
+                    color: $color;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

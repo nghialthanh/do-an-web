@@ -1,0 +1,72 @@
+.dialog-test{
+    .modal-dialog{
+        max-width: 60vw;
+    }
+    .modal-content{
+        padding-left: 1rem;
+        padding-right: 1rem;
+        .modal-header{
+            display: flex;
+            justify-content: center;
+            position: relative;
+            .modal-title{
+                color: $color-weith-opacity;
+                .ReactCountdownClock{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                }
+            }
+        }
+        .question-item{
+            .header-question-item{
+                font-size: 1rem;
+                padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+                span{
+                    color: $color-weith-opacity;
+                    font-weight: 700;
+                }
+            }
+            .answer-question-item{
+                display: flex;
+                flex-direction: row;
+                .row-answer-question-item{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    width: 50%;
+                    .item-answer-question-item{
+                        padding: 0.5rem 2rem 0.5rem 2rem;
+                        span{
+                            width: auto;
+                            &:hover{
+                                cursor: pointer;
+                            }
+                        }
+                        .answer-chose-item{
+                            color: $color;
+                            font-weight: 600;
+                        }
+
+                    }
+                }
+                
+            }
+        }
+        .modal-footer{
+            button{
+                background-color: $color-weith-opacity;
+                color: white;
+                border-color: $color-weith-opacity;
+                font-weight: 600;
+                &:hover{
+                    background-color: white;
+                    color: $color-weith-opacity
+                }
+            }
+        }
+    }
+}
