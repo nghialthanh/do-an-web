@@ -14,7 +14,7 @@
 .education{
     width: 100vw;
     margin-top: $margin-top-main;
-    background-image: url('../../../assets/img/bg-7.png');
+    background-image: url('../../../../assets/img/bg-7.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -38,6 +38,9 @@
             border-radius: 12px;
             position: relative;
             bottom: 0;
+            a:hover{
+                text-decoration: none;
+            }
             img{
 
             }

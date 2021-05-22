@@ -26,7 +26,8 @@ function Login(props) {
             const params = {
                 ...acc,
                 userName: "nghia",
-                password: '123456'
+                password: '123456',
+                type: '1'
             }
             const action = setLogin(params);
             dispatch(action);
@@ -43,16 +44,38 @@ function Login(props) {
                 position: 'top'
             });
         }
+        else if(_emailFocus==='tam' && _passwordFocus==='123456'){
+            const params = {
+                ...acc,
+                userName: "tam",
+                password: '123456',
+                type: '2'
+            }
+            const action = setLogin(params);
+            dispatch(action);
+            localStorage.setItem('avatar',acc.avatar);
+            localStorage.setItem('acc','tam');
+            props.setOpenLogin(false);
+            Swal.fire({
+                text: "Đăng nhập thành công",
+                showConfirmButton: false,
+                icon: 'success',
+                timer: 1500,
+                timerProgressBar: true,
+                toast: true,
+                position: 'top'
+            });
+        }
         else
-        Swal.fire({
-            text: "Thông tin sai",
-            showConfirmButton: false,
-            icon: 'error',
-            timer: 1500,
-            timerProgressBar: true,
-            toast: true,
-            position: 'top'
-        });
+            Swal.fire({
+                text: "Thông tin sai",
+                showConfirmButton: false,
+                icon: 'error',
+                timer: 1500,
+                timerProgressBar: true,
+                toast: true,
+                position: 'top'
+            });
             
     }
     return (

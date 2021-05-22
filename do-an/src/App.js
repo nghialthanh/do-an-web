@@ -16,6 +16,7 @@ const Register = lazy(() => import('./component/register/register'));
 const InfoAccount = lazy(() => import('./component/account/account'));
 const FormTest = lazy(() => import("./component/dialog-test/dialog-test"));
 const ContactAccount = lazy(() => import('./component/contact/contact'));
+const TestWeek = lazy(() => import("./component/dialog-test/testWeek/testWeek"));
 
 function App() {
   const [openLogin,setOpenLogin] = useState(false);
@@ -25,7 +26,8 @@ function App() {
     if(localStorage.getItem('acc')){
       const params = {
         userName: localStorage.getItem('acc'),
-        avatar: localStorage.getItem('avatar')
+        avatar: localStorage.getItem('avatar'),
+        type: '1'
       }
       const action = setLogin(params);
       dispatch(action);
@@ -48,7 +50,7 @@ function App() {
         />
         <FormTest/>
         <Switch>
-          <Route path="/trang-chu" component={() => 
+          <Route path="/pages" component={() => 
                                               <Home/>
           }/>
           <Route path="/thong-tin" component={() => 
@@ -57,13 +59,16 @@ function App() {
           <Route path="/so-lien-lac" component={() => 
                                               <ContactAccount/>
           }/>
+          <Route path="/kiem-tra" component={() => 
+                                              <TestWeek/>
+          }/>
           {/* <Route path="/phim" component={() => 
                                               <Film/>
           }/>
           <Route path="/search/:string" component={() => 
                                               <Search/>
           }/> */}
-          <Redirect from="/" to="/trang-chu"/>
+          <Redirect from="/" to="/pages/trang-chu"/>
         </Switch>
         <Footer/>
       </Suspense>
@@ -71,5 +76,26 @@ function App() {
     
   );
 }
+
+// function PrivateRoute({ children, ...rest }) {
+//   const postdetail = useSelector(state => state.EditPost.postDetail)
+//   return (
+//     <Route
+//       {...rest}
+//       render={({ location }) =>
+//         postdetail.postID ? (
+//           children
+//         ) : (
+//           <Redirect
+//             to={{
+//               pathname: "/",
+//               state: { from: location }
+//             }}
+//           />
+//         )
+//       }
+//     />
+//   );
+// }
 
 export default withTranslation()(App);

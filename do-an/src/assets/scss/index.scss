@@ -14,7 +14,13 @@
 
 
 @import "../../component/home/home.scss";
-    @import "../../component/home/home-child/form-Admission.scss";
-    @import "../../component/home/introdu/introduct.scss";
-    @import "../../component/home/educate/education.scss";
+    @import "../../component/home/course/course.scss";
+        @import "../../component/home/course/employy/employee.scss";
+    @import "../../component/home/courseDetail/courseDetail.scss";
+        @import "../../component/home/courseDetail/method/method.scss";
+    //----------------main--------------//
+    @import "../../component/home/main/home-child/form-Admission.scss";
+    @import "../../component/home/main/introdu/introduct.scss";
+    @import "../../component/home/main/educate/education.scss";
 @import "../../component/dialog-test/dialog-test.scss";
+    @import "../../component/dialog-test/testWeek/testWeek.scss";

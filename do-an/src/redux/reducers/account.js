@@ -2,7 +2,8 @@ const initialState = {
     acc: {
         userName: '',
         password: '',
-        avatar: 'https://www.w3schools.com/howto/img_avatar.png'
+        avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+        type: '1'
     },
 }
 

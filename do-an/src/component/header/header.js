@@ -17,6 +17,7 @@ import {
 import { RiAccountBoxFill,RiContactsBookFill,RiSettings3Fill} from "react-icons/ri";
 import {FiLogOut} from "react-icons/fi";
 import {GiOpenBook} from "react-icons/gi";
+import { FaCalendarCheck } from "react-icons/fa";
 
 import { useTranslation, withTranslation } from 'react-i18next';
 import { Link, NavLink as RRNavLink, useHistory} from "react-router-dom";
@@ -43,6 +44,46 @@ function Header(props) {
         localStorage.removeItem('acc');
         window.location.reload();
     }
+    //------------------ render menu sort by type ---------------//
+    const renderMenu = () => {
+        if(acc.type==='1')
+            return(
+                <DropdownMenu right>
+                    <DropdownItem href="/thong-tin">
+                        <RiAccountBoxFill/>&emsp;<span>Thông tin</span>
+                    </DropdownItem>
+                    <DropdownItem href="/so-lien-lac">
+                        <RiContactsBookFill/>&emsp;<span>Sổ liên lạc</span>
+                    </DropdownItem>
+                    <DropdownItem onClick={() => handleOpenFormTest()}>
+                        <GiOpenBook/>&emsp;<span>Kiểm tra </span>
+                    </DropdownItem>
+                    <DropdownItem >
+                        <RiSettings3Fill/>&emsp;<span>Cài đặt</span>
+                    </DropdownItem>
+                    <DropdownItem className="log-out-header-head" onClick={()=>handleLogOut()}>
+                        <FiLogOut/>&emsp;<span>Đăng xuất</span>
+                    </DropdownItem>
+                </DropdownMenu>
+            )
+        else 
+            return(
+                <DropdownMenu right>
+                    <DropdownItem href="/thong-tin">
+                        <RiAccountBoxFill/>&emsp;<span>Thông tin</span>
+                    </DropdownItem>
+                    <DropdownItem>
+                        <FaCalendarCheck/>&emsp;<span>Điểm danh</span>
+                    </DropdownItem>
+                    <DropdownItem >
+                        <RiSettings3Fill/>&emsp;<span>Cài đặt</span>
+                    </DropdownItem>
+                    <DropdownItem className="log-out-header-head" onClick={()=>handleLogOut()}>
+                        <FiLogOut/>&emsp;<span>Đăng xuất</span>
+                    </DropdownItem>
+                </DropdownMenu>
+        )
+    }
     return (
         <div className="header">
             <div className="header-head">
@@ -54,23 +95,7 @@ function Header(props) {
                         <DropdownToggle nav caret tag="span">
                             Chào, {acc.userName}
                         </DropdownToggle>
-                        <DropdownMenu right>
-                            <DropdownItem href="/thong-tin">
-                                    <RiAccountBoxFill/>&emsp;<span>Thông tin</span>
-                            </DropdownItem>
-                            <DropdownItem href="/so-lien-lac">
-                                <RiContactsBookFill/>&emsp;<span>Sổ liên lạc</span>
-                            </DropdownItem>
-                            <DropdownItem onClick={() => handleOpenFormTest()}>
-                                <GiOpenBook/>&emsp;<span>Kiểm tra </span>
-                            </DropdownItem>
-                            <DropdownItem >
-                                <RiSettings3Fill/>&emsp;<span>Cài đặt</span>
-                            </DropdownItem>
-                            <DropdownItem className="log-out-header-head" onClick={()=>handleLogOut()}>
-                                <FiLogOut/>&emsp;<span>Đăng xuất</span>
-                            </DropdownItem>
-                        </DropdownMenu>
+                        {renderMenu()}
                     </UncontrolledDropdown>
                     }
                 </div>
@@ -81,17 +106,17 @@ function Header(props) {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="me-auto" navbar>
                     <NavItem>
-                        <NavLink exact to="/trang-chu/page-1" tag={RRNavLink} activeClassName="active-nav-link">
+                        <NavLink exact to="/pages/trang-chu/" tag={RRNavLink} activeClassName="active-nav-link">
                         {t('home')}
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink exact to="/khoa-hoc" tag={RRNavLink} activeClassName="active-nav-link"> 
+                        <NavLink exact to="/pages/khoa-hoc" tag={RRNavLink} activeClassName="active-nav-link"> 
                         {t('program')}
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink exact to="/clip/page-1" tag={RRNavLink} activeClassName="active-nav-link">
+                        <NavLink exact to="/clip/" tag={RRNavLink} activeClassName="active-nav-link">
                         {t('center')}
                         </NavLink>
                     </NavItem>

@@ -21,52 +21,60 @@
                 }
             }
         }
-        .question-item{
-            .header-question-item{
-                font-size: 1rem;
-                padding: 0.5rem 0.75rem 0.5rem 0.75rem;
-                span{
-                    color: $color-weith-opacity;
-                    font-weight: 700;
+        .modal-body{
+            table{
+                margin-top: 1rem;
+                thead{
+                    text-align: center;
+                }
+                tbody{
+                    text-align: center;
                 }
             }
-            .answer-question-item{
-                display: flex;
-                flex-direction: row;
-                .row-answer-question-item{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    width: 50%;
-                    .item-answer-question-item{
-                        padding: 0.5rem 2rem 0.5rem 2rem;
-                        span{
-                            width: auto;
-                            &:hover{
-                                cursor: pointer;
-                            }
-                        }
-                        .answer-chose-item{
-                            color: $color;
-                            font-weight: 600;
-                        }
-
-                    }
-                }
-                
-            }
-        }
-        .modal-footer{
-            button{
-                background-color: $color-weith-opacity;
-                color: white;
-                border-color: $color-weith-opacity;
-                font-weight: 600;
+            .complete-test{
+                color: #1fb141;
+                font-weight: 700;
                 &:hover{
-                    background-color: white;
-                    color: $color-weith-opacity
+                    cursor: not-allowed;
+                    text-decoration: underline;
+                }
+            }
+            .not-join-test{
+                color: red;
+                font-weight: 700;
+                &:hover{
+                    cursor: not-allowed;
+                    text-decoration: underline;
+                }
+            }
+            .joinning-test{
+                color: $color;
+                font-weight: 700;
+                &:hover{
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+            .not-yet-time-test{
+                color: gray;
+                font-weight: 700;
+                &:hover{
+                    cursor: not-allowed;
+                    text-decoration: underline;
                 }
             }
         }
+        // .modal-footer{
+        //     button{
+        //         background-color: $color-weith-opacity;
+        //         color: white;
+        //         border-color: $color-weith-opacity;
+        //         font-weight: 600;
+        //         &:hover{
+        //             background-color: white;
+        //             color: $color-weith-opacity
+        //         }
+        //     }
+        // }
     }
 }
