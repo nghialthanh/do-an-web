@@ -7,6 +7,10 @@ const userApi = {
         const url = '/api/CourseDetail/all/course/'+id;
         return axiosApi.get(url);
     },
+    getCourseofTeacher : (id) => {
+        const url = '/api/Employee/teacher/allcourse/'+id;
+        return axiosApi.get(url);
+    },
     getCourseNotLearn: (id) => {
         const url = '/api/course/All/'+id+'/noregister';
         return axiosApi.get(url);
@@ -23,6 +27,14 @@ const userApi = {
     },
     ChangePassEmployee: (params) => {
         const url = '/api/auth/employee/ChangePassword';
+        return axiosApi.post(url, {...params});
+    },
+    getRollCallteacher: (params) => {
+        const url = '/api/Employee/manage/ver2';
+        return axiosApi.get(url, {...params});
+    },
+    postRollCall: (id,params) => {
+        const url = '/api/attendance/course/'+id;
         return axiosApi.post(url, {...params});
     },
 }

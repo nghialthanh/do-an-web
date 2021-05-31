@@ -18,7 +18,7 @@ function Footer() {
             <div className="ft footer-list">
                 <h3>Khóa Học</h3>
                 <ul>
-                    <li>>&emsp;Mẫu giáo WECEC Ontario</li>
+                    <li>>&emsp;Mẫu giáo SPEAK ENGLISH Ontario</li>
                     <li>>&emsp;Tiếng Anh dành cho thiếu nhi</li>
                     <li>>&emsp;Tiếng Anh dành cho thiếu niên</li>
                     <li>>&emsp;Tiếng Anh giao tiếp dành cho người lớn</li>
@@ -27,7 +27,7 @@ function Footer() {
                 </ul>
             </div>
             <div className="ft footer-contact">
-                <h3>Liên Hệ WECEC</h3>
+                <h3>Liên Hệ SPEAK ENGLISH</h3>
                 <div>
                     <p><span className="material-icons">apartment</span>&ensp;619 Lê Trọng Tấn, Quận Bình Tân</p>
                     <p><span className="material-icons">phone</span>&ensp;1900986800 - 02822479595</p>

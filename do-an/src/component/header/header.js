@@ -112,7 +112,7 @@ function Header(props) {
                 </div>
             </div>
             <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">TRUNG TÂM WECEC</NavbarBrand>
+                <NavbarBrand href="/">TRUNG TÂM SPEAK ENGLISH</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="me-auto" navbar>
@@ -133,7 +133,7 @@ function Header(props) {
                     </NavItem>
                     <NavItem>
                         <NavLink exact to="/clip/" tag={RRNavLink} activeClassName="active-nav-link">
-                        Trung Tâm WECEC
+                            Trung Tâm SPEAK ENGLISH
                         </NavLink>
                     </NavItem>
                         <a href="tel:+85935628946"><Button>Liên Hệ</Button></a>

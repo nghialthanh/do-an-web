@@ -32,7 +32,8 @@ function InfoAccount(props) {
                 _setDataNotlearn(response[1]);
             }
             else{
-                const response = await userApi.getCourseofStudent("stu04-000003");
+                const response = await userApi.getCourseofTeacher(acc.userId);
+                console.log(response)
                 _setData(response);
             }
         }catch(error){
@@ -182,6 +183,7 @@ function InfoAccount(props) {
             </div>
             <Schedule
                 _data={_data}
+                acc={acc}
             />
             <Modal
                 modalClassName="modal-black dialog-register-cours"

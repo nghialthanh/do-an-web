@@ -33,11 +33,12 @@
         padding-left: 8rem;
         padding-right: 8rem;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         flex-flow: wrap;
         .card{
             width: calc(100% / 3 - 40px);
+            margin-right: 30px;
             border-radius: 12px;
             position: relative;
             bottom: 0;

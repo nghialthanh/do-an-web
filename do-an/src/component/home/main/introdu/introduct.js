@@ -13,8 +13,8 @@ function Introduce() {
         <div className="introduce" data-aos="fade-up">
             <div className="text-introduce"><div className="text-introduce-1">
                 <div>
-                    <h3>{t('introduce')}</h3>
-                    <p>WECEC là Trung tâm Anh ngữ đầu tiên trở thành đối tác chính thức của Hội đồng 
+                    <h3>Về SPEAK ENGLISH</h3>
+                    <p>SPEAK ENGLISH là Trung tâm Anh ngữ đầu tiên trở thành đối tác chính thức của Hội đồng 
                         Học thuật Windsor Essex, bang Ontario, Canada. Chúng tôi tự hào mang đến những 
                         khóa học tiếng Anh dựa trên chương trình giảng dạy của Ontario, Canada; phương 
                         pháp giảng dạy dựa trên nhu cầu thực tế, với nền tảng là những nghiên cứu và phát 
@@ -23,7 +23,7 @@ function Introduce() {
                         tiên tiến. Chúng tôi chú trọng việc hướng dẫn học sinh trong quá trình học, điều 
                         này vừa mang lại niềm vui vừa giúp học viên dễ dàng tiếp thu kiến thức một cách nhanh 
                         chóng và hiệu quả hơn.</p><br/>
-                    <p>Các chương trình WECEC được thiết kế giúp cho khả năng ngôn ngữ của học viên phát triển 
+                    <p>Các chương trình SPEAK ENGLISH được thiết kế giúp cho khả năng ngôn ngữ của học viên phát triển 
                         tự nhiên, tự tin khám phá, phát triển khả năng của bản thân.</p><br/>
                     <p>Bên cạnh đó, với chương trình học theo phương pháp giáo dục của Canada sẽ trang bị cho 
                         học viên những kỹ năng học tập cần thiết để thành công, không chỉ trong việc học tiếng 
