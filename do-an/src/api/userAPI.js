@@ -31,10 +31,10 @@ const userApi = {
     },
     getRollCallteacher: (params) => {
         const url = '/api/Employee/manage/ver2';
-        return axiosApi.get(url, {...params});
+        return axiosApi.post(url, {...params});
     },
-    postRollCall: (id,params) => {
-        const url = '/api/attendance/course/'+id;
+    postRollCall: (params) => {
+        const url = '/api/attendance/course/attendance';
         return axiosApi.post(url, {...params});
     },
 }
