@@ -4,46 +4,50 @@ import {
     Modal, ModalBody, ModalHeader,Form,FormGroup,InputGroup,Input,InputGroupAddon,
     InputGroupText,Label,Button, CustomInput, Col
   } from 'reactstrap';
-
+  import parse from 'html-react-parser';
 
 function Schedule(props) {
+    const renderschedule = (e1) => {
+        let count="";
+        return e1.map((e) =>{
+            count=e.day+" - ("+e.timeStart+"->"+e.timeEnd+")";
+            return(
+                <>
+                    {count}<br/>
+                </>
+            )
+        })
+    }
+    const renderCourse = () => {
+        return props._data.map((e) => {
+            return(
+                <tr>
+                    <td>{e.courses.name}</td>
+                    <td>{renderschedule(e.courses.schedules)}</td>
+                    <td>{e.dayStart.slice(0,10)}</td>
+                    <td>{e.dayFinish.slice(0,10)}</td>
+                    <td>{(e.finish)?"Đã hoàn thành":"Đang học"}</td>
+                </tr>
+            )
+        })
+    }
     return (
         <div className="schedule">
             <div className="header-schedule">
                 <h5>Thời khóa biểu</h5>
             </div>
-            <div className="body-schedule">
+            {(props._data.length!==0) && <div className="body-schedule">
                 <table>
                     <tr>
-                        <th>Mã lớp</th>
-                        <th>Số tuần</th>
+                        <th>Tên lớp</th>
                         <th>Ngày học</th>
-                        <th>Thời gian</th>
-                        <th>Ngày khai giảng</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+                        <th>Trạng thái</th>
                     </tr>
-                    <tr>
-                        <td>Ontario 01-05</td>
-                        <td>144</td>
-                        <td>Thứ 7 - CN</td>
-                        <td>8:00 - 10:00<br/>10:00 - 12:00<br/>14:00 - 16:00</td>
-                        <td>18/05/2020</td>
-                    </tr>
-                    <tr>
-                        <td>Ontario 01</td>
-                        <td>144</td>
-                        <td>Thứ 3-5-7<br/>Thứ 2-4-6</td>
-                        <td>17h45-19h15</td>
-                        <td>18/05/2020</td>
-                    </tr>
-                    <tr>
-                        <td>Ontario 02</td>
-                        <td>144</td>
-                        <td>Thứ 3-5-7<br/>Thứ 2-4-6</td>
-                        <td>17h45-19h15</td>
-                        <td>18/05/2020</td>
-                    </tr>
+                    {renderCourse()}
                 </table>
-            </div>
+            </div>}
         </div>
     )
 }

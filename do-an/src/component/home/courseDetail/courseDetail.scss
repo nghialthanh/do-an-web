@@ -14,6 +14,7 @@
             align-items: center;
             flex-direction: row;
             padding: 3rem 8rem 2rem 8rem;
+            
             .CourseDetail-content{
                 width: 60%;
                 color: black;
@@ -33,27 +34,19 @@
                     width: 100%;
                     text-align: center;
                 }
-                .ads-CourseDetail{
+                .additional-CourseDetail{
                     width: 100%;
-                    margin-top: .5rem;
                     display: flex;
                     flex-direction: row;
-                    justify-content: space-around;
+                    justify-content: flex-start;
                     flex-flow: wrap;
                     div{
-                        width: 40%;
+                        width: 22%;
                         display: flex;
                         align-items: center;
-                        flex-direction: column;
-                        svg{
-                            font-size: 50px;
-                            color: $color;
-                        }
-                        p{
-                            font-weight: 600;
-                        }
                     }
                 }
+                
             }
             .img-intro{
                 width: 40%;

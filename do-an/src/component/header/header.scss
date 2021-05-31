@@ -35,6 +35,17 @@
             }
             .dropdown{
                 .dropdown-menu{
+                    a{
+                        &:hover{
+                        text-decoration: none;
+                        }
+                        &:focus{
+                            background-color: $color;
+                        }
+                        &:active{
+                            background-color: $color;
+                        }
+                    }
                     .dropdown-item{
                         font-size: 1rem;
                         display: flex;
@@ -44,6 +55,12 @@
                         }
                         span{
                             color: $color-weith;
+                        }
+                        &:focus{
+                            background-color: $color;
+                        }
+                        &:active{
+                            background-color: $color;
                         }
                     }
                     .log-out-header-head{

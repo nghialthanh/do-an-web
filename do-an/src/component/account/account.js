@@ -1,33 +1,76 @@
 
 import React, { useState,useRef,useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import {
     Modal, ModalBody, ModalHeader,Form,FormGroup,InputGroup,Input,InputGroupAddon,
-    InputGroupText,Label,Button, CustomInput, Col
+    InputGroupText,Label,Button, CustomInput, Col, Table, ModalFooter
   } from 'reactstrap';
+import Swal from 'sweetalert2';
+
 import Schedule from "./schedule/schedule";
 
+import userApi from "../../api/userAPI";
+
 function InfoAccount(props) {
+    const acc = useSelector(state => state.Login.acc);
     const [_remember,_setRemember] = useState(true);
-    const [_email, _setEmail] = useState('');
+    const [_email, _setEmail] = useState(acc.email);
     const [_password, _setPassword] = useState('');
-    const [_name,_setName] = useState('');
-    const [_phone,_setPhone] = useState('');
-    const [_birth,_setBirth] = useState();
+    const [_showPass,_setShowPass] = useState(false);
+    const [_name,_setName] = useState(acc.lastName+' '+acc.firstName);
+    const [_phone,_setPhone] = useState(acc.phoneNumber);
+    const [_birth,_setBirth] = useState(acc.birthday.slice(0,10));
+    const [_openForm,_setOpenForm] = useState(false);
+    const [_data,_setData] = useState([]);
+    const [_dataNotLearn,_setDataNotlearn] = useState([]);
+    const takeDataStudent = async() => {
+        try{
+            if(acc.studentId){
+                const response = await Promise.all([userApi.getCourseofStudent(acc.studentId),userApi.getCourseNotLearn(acc.studentId)]);
+                _setData(response[0]);
+                console.log(response[0])
+                _setDataNotlearn(response[1]);
+            }
+            else{
+                const response = await userApi.getCourseofStudent("stu04-000003");
+                _setData(response);
+            }
+        }catch(error){
+            console.log("Failed to call API data ", error);
+        }
+    }
+    useEffect(()=>{
+        takeDataStudent();
+    },[acc.studentId])
+    const rendernotLearn = () => {
+        return _dataNotLearn.map((e) => {
+            return(
+                <Label check key={e.id}>
+                    <Input type="checkbox" />{' '}
+                    {e.name}
+                </Label>
+            )
+        })
+    }
     return (
         <div className="info-account">
             <div className="header-info-account">
                 <h4>Thông tin tài khoản</h4>
             </div>
             <div className="body-info-account">
-                <div className="info-member">
+                {(acc.studentId && _dataNotLearn.length!==0) && <div className="info-member">
                     <div className="header-infor-member">
-                        Thông tin thẻ thành viên
+                        Khóa học đề xuất
                     </div>
                     <div className="body-infor-member">
-                        <span>Bạn chưa kích hoạt tài khoản</span>
-                        <Button>Kích hoạt ngay</Button>
+                        <FormGroup check>
+                            {rendernotLearn()}
+                        </FormGroup>
                     </div>
-                </div>
+                    <div className="footer-infor-member" onClick={()=>_setOpenForm(true)}>
+                        Đăng ký
+                    </div>
+                </div>}
                 <div className="info-private">
                     <div className="header-info-private">
                         Thông tin cá nhân
@@ -37,6 +80,7 @@ function InfoAccount(props) {
                             <Label>Họ và tên</Label>
                             <Col>
                                 <Input
+                                    disabled
                                     placeholder="Họ và tên"
                                     type="text"
                                     value={_name}
@@ -48,6 +92,7 @@ function InfoAccount(props) {
                             <Label>Số điện thoại</Label>
                             <Col>
                                 <Input
+                                    disabled
                                     placeholder="Email"
                                     type="text"
                                     value={_phone}
@@ -59,6 +104,7 @@ function InfoAccount(props) {
                             <Label>Ngày sinh</Label>
                             <Col>
                             <Input 
+                                disabled
                                 type="date"
                                 name="date"
                                 id="exampleDate"
@@ -71,6 +117,7 @@ function InfoAccount(props) {
                             <Label>Địa chỉ email</Label>
                             <Col>
                                 <Input
+                                    disabled
                                     placeholder="Email"
                                     type="text"
                                     value={_email}
@@ -79,13 +126,13 @@ function InfoAccount(props) {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label>Mật khẩu</Label>
+                            <Label>Loại</Label>
                             <Col>
                                 <Input
+                                    disabled
                                     placeholder="Password"
-                                    type="password"
-                                    value={_password}
-                                    onChange={(event) => _setPassword(event.target.value)}
+                                    type="text"
+                                    value={(acc.studentId)?"Học viên":"Giảng viên"}
                                 />
                             </Col>
                         </FormGroup>
@@ -98,8 +145,90 @@ function InfoAccount(props) {
                             </FormGroup> */}
                     </Form>
                 </div>
+                {(!acc.studentId && acc.userId) && <div className="info-member">
+                    <div className="header-infor-member">
+                        Thông tin thêm
+                    </div>
+                    <div className="body-infor-member" style={{height: "320px",borderRadius: "0 0 15px 15px"}}>
+                        <Table borderless>
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <th>Trạng thái</th>
+                                    <td>Nhân viên chính thức</td>
+                                </tr>
+                                <tr>
+                                    <th>Điểm thành tích</th>
+                                    <td>8/10đ</td>
+                                </tr>
+                                <tr>
+                                    <th>Khóa học đang dạy</th>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <th>Giờ dạy trong tháng</th>
+                                    <td>30h</td>
+                                </tr>
+                                <tr>
+                                    <th>Lương mỗi giờ</th>
+                                    <td>200.000 vnđ</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                        <div className="hr"></div>
+                        <p><strong>Tổng</strong>&ensp;&emsp;&emsp;&emsp;&emsp;&emsp; 6.000.000 vnđ</p>
+                    </div>
+                </div>}
             </div>
-            <Schedule/>
+            <Schedule
+                _data={_data}
+            />
+            <Modal
+                modalClassName="modal-black dialog-register-cours"
+                isOpen={_openForm}
+                toggle={() => _setOpenForm(false)}
+            >
+                <ModalHeader>
+                    ĐĂNG KÝ KHÓA HỌC
+                </ModalHeader>
+                <ModalBody>
+                    <Table borderless>
+                        <tbody>
+                            <tr>
+                                <th>IELTS dành cho người đi làm</th>
+                            </tr>
+                            <tr>
+                                <th>Số buổi học</th>
+                                <td>144 Tuần</td>
+                            </tr>
+                            <tr>
+                                <th>Thời khóa biểu</th>
+                                <td>T7,Cn</td>
+                            </tr>
+                            <tr>
+                                <th>Số tiền</th>
+                                <td>10.000.000 vnđ</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        onClick={() =>
+                            Swal.fire({
+                                text: "Tính năng đang phát triển",
+                                showConfirmButton: false,
+                                icon: 'warning',
+                                timer: 1500,
+                                timerProgressBar: true,
+                                toast: true,
+                                position: 'bottom-left'
+                            })
+                        }
+                    >
+                        Thanh Toán</Button>
+                </ModalFooter>
+            </Modal> 
         </div>
     )
 }

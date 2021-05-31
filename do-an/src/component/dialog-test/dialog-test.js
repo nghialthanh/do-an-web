@@ -34,30 +34,6 @@ function Dialog_test() {
         History.push('/kiem-tra');
     }
     return (
-        // <Modal
-        //     modalClassName="modal-black dialog-test"
-        //     isOpen={openForm}
-        //     toggle={() => handleOpenFormTest(false)}
-        // >
-        //     <ModalHeader>
-        //         BÀI KIỂM TRA ĐẦU VÀO
-        //         <div className="ReactCountdownClock">
-        //             <ReactCountdownClock 
-        //                 seconds={60}
-        //                 color="rgb(23, 47, 72)"
-        //                 alpha={0.9}
-        //                 size={40}
-        //                 onComplete={()=>handleOpenFormTest(false)}
-        //             />
-        //         </div>
-        //     </ModalHeader>
-        //     <ModalBody>
-        //         {renderQuestion()}
-        //     </ModalBody>
-        //     <ModalFooter>
-        //         <Button>Hoàn thành</Button>
-        //     </ModalFooter>
-        // </Modal> 
         <Modal
             modalClassName="modal-black dialog-test"
             isOpen={openForm}

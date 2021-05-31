@@ -38,6 +38,30 @@
             border-radius: 12px;
             position: relative;
             bottom: 0;
+            .card-discount{
+                position: absolute;
+                left: -5px;
+                top: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 600;
+                color: white;
+                width: 4rem;
+                height: 2rem;
+                background-color: $color;
+                border-radius: 5px 15px 15px 0px;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: -7px;
+                    border-bottom-left-radius: 15px;
+                    width: 5px;
+                    background-color: rgb(17, 54, 93);
+                    height: 7px;
+                }
+            }
             a:hover{
                 text-decoration: none;
             }

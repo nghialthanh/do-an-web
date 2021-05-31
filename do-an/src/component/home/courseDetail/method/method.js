@@ -1,5 +1,7 @@
 import React from 'react';
-
+import { ImBooks } from "react-icons/im";
+import { GiBrain,GiTeamIdea } from "react-icons/gi";
+import { FcIdea } from "react-icons/fc";
 function Method() {
     return (
         <div className="method">
@@ -63,6 +65,12 @@ function Method() {
                         </p>
                     </div>
                 </div>
+            </div>
+            <div className="ads-CourseDetail">
+                    <div><FcIdea/><p>Phương pháp giảng dạy</p></div>
+                    <div><ImBooks/><p>Nội dung giảng dạy</p></div>
+                    <div><GiTeamIdea/><p>Đội ngũ giáo viên</p></div>
+                    <div><GiBrain/><p>Con đường đi du học</p></div>
             </div>
         </div>
     );

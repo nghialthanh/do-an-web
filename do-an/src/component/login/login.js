@@ -7,6 +7,7 @@ import {
   } from 'reactstrap';
 import Swal from 'sweetalert2';
 
+import webApi from '../../api/webAPI';
 import { setLogin } from "../../redux/actions/account";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,62 +22,60 @@ function Login(props) {
         props.setOpenLogin(false);
     }
     //------------------ handle login ---------------------//
-    const handleLogin = () => {
-        if(_emailFocus==='nghia' && _passwordFocus==='123456'){
-            const params = {
-                ...acc,
-                userName: "nghia",
-                password: '123456',
-                type: '1'
-            }
-            const action = setLogin(params);
-            dispatch(action);
-            localStorage.setItem('avatar',acc.avatar);
-            localStorage.setItem('acc','nghia');
-            props.setOpenLogin(false);
-            Swal.fire({
-                text: "Đăng nhập thành công",
-                showConfirmButton: false,
-                icon: 'success',
-                timer: 1500,
-                timerProgressBar: true,
-                toast: true,
-                position: 'top'
-            });
+    const handleLogin = async() => {
+        const params = {
+            userID: _emailFocus,
+            password: _passwordFocus
         }
-        else if(_emailFocus==='tam' && _passwordFocus==='123456'){
-            const params = {
-                ...acc,
-                userName: "tam",
-                password: '123456',
-                type: '2'
+        console.log(params);
+        try{
+            let response;
+            if(props.roleLogin)
+                response = await webApi.LoginStudent(params);
+            else
+                response = await webApi.LoginTeacher(params);
+            console.log(response);
+            if (response.success===true){
+                const action = setLogin(response.result);
+                dispatch(action);
+                props.setOpenLogin(false);
+                if(response.result.studentId)
+                    localStorage.setItem('id',response.result.studentId);
+                else 
+                    localStorage.setItem('id',response.result.userId);
+                localStorage.setItem('token',response.result.token);
+                Swal.fire({
+                    text: "Đăng nhập thành công",
+                    showConfirmButton: false,
+                    icon: 'success',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    toast: true,
+                    position: 'bottom-left'
+                });
             }
-            const action = setLogin(params);
-            dispatch(action);
-            localStorage.setItem('avatar',acc.avatar);
-            localStorage.setItem('acc','tam');
-            props.setOpenLogin(false);
+            else 
+                Swal.fire({
+                    text: "Tài khoản hoặc mật khẩu chưa đúng",
+                    showConfirmButton: false,
+                    icon: 'error',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    toast: true,
+                    position: 'bottom-left'
+                });
+        }catch(error) {
             Swal.fire({
-                text: "Đăng nhập thành công",
-                showConfirmButton: false,
-                icon: 'success',
-                timer: 1500,
-                timerProgressBar: true,
-                toast: true,
-                position: 'top'
-            });
-        }
-        else
-            Swal.fire({
-                text: "Thông tin sai",
+                text: "Lỗi bạn vui lòng thử lại sau",
                 showConfirmButton: false,
                 icon: 'error',
                 timer: 1500,
                 timerProgressBar: true,
                 toast: true,
-                position: 'top'
+                position: 'bottom-left'
             });
-            
+            console.log("Failed to call API Login ", error);
+        };     
     }
     return (
         <Modal
@@ -88,7 +87,7 @@ function Login(props) {
                 <div className="avatar-icon">
                     <img alt="avatar" src={require("../../assets/img/avatar.png").default}/>
                 </div>
-                <span>Đăng Nhập</span>
+                <span>{(props.roleLogin)?"Học Viên":"Giảng viên"}</span>
             </ModalHeader>
             <ModalBody>
             <Form role="form">

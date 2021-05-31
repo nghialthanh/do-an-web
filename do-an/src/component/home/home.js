@@ -7,6 +7,7 @@ import { setShowFormTest } from "../../redux/actions/openForm";
 
 const Main = lazy(() => import('./main/main'));
 const Course = lazy(() => import('./course/course'));
+const NewPage = lazy(() => import('./newsPage/newPage'));
 const CourseDetail = lazy(() => import('./courseDetail/courseDetail'));
 const Method = lazy(() => import('./courseDetail/method/method'));
 
@@ -39,6 +40,9 @@ function Home() {
                                                                     <CourseDetail/>
                                                                     <Method/>
                                                                 </>
+                    }/>
+                    <Route path="/pages/tin-tuc" component={() => 
+                                                                <NewPage/>
                     }/>
             </Switch>
         )

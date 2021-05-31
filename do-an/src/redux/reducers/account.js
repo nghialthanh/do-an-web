@@ -1,9 +1,16 @@
 const initialState = {
     acc: {
-        userName: '',
-        password: '',
-        avatar: 'https://www.w3schools.com/howto/img_avatar.png',
-        type: '1'
+        address: "",
+        birthday: "",
+        departmentId: 0,
+        email: "",
+        firstName: "",
+        lastName: "",
+        level: 0,
+        phoneNumber: "",
+        sex: false,
+        studentId: "",
+        token: ""
     },
 }
 
