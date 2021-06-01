@@ -5,33 +5,93 @@ import {
     Modal, ModalBody, ModalHeader,Form,FormGroup,InputGroup,Input,InputGroupAddon,
     InputGroupText,Label,Button, ModalFooter,Table
   } from 'reactstrap';
-import axios from 'axios';
+import { useHistory,} from 'react-router';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setShowFormTest } from "../../redux/actions/openForm";
-import { useHistory, useLocation } from 'react-router';
 
-const removeClassName = (index) =>{
-    document.getElementsByClassName('answer-question-item-0')[index].classList.remove('answer-chose-item');
-    document.getElementsByClassName('answer-question-item-1')[index].classList.remove('answer-chose-item');
-    document.getElementsByClassName('answer-question-item-2')[index].classList.remove('answer-chose-item');
-    document.getElementsByClassName('answer-question-item-3')[index].classList.remove('answer-chose-item');
-}
+import { setShowFormTest } from "../../redux/actions/openForm";
+import { setTestID } from "../../redux/actions/account";
+import userApi from '../../api/userAPI';
 
 function Dialog_test() {
     const openForm = useSelector(state => state.openForm.openDialogTest);
+    const acc = useSelector(state => state.Login.acc);
     const dispatch = useDispatch();
     const History = useHistory();
+    const [_data,_setData] = useState([]);
+    const [_list, _setList] = useState([]);
     //------------------ handle open form test -------------------------//
     const handleOpenFormTest = (e) =>{
         const action = setShowFormTest(e);
         dispatch(action);
     }
     //------------------ handle go test-------------------------//
-    const handleGoTest = () =>{
+    const handleGoTest = (e1) =>{
+        console.log(e1);
+        const action1 = setTestID(e1);
+        dispatch(action1);
         const action = setShowFormTest(false);
         dispatch(action);
         History.push('/kiem-tra');
+    }
+    const handleChange = async(event) => {
+        if(event.target.value!=='0'){
+            try{
+                const response1 = await userApi.getAllTest(acc.studentId ,event.target.value);
+                console.log(response1);
+                    _setList(response1);
+            }catch(error){
+                console.log("Failed to call API data detail contact", error);
+            }
+        }
+    }
+    useEffect(() =>{
+        const takeData = async() => {
+            try{
+                const response = await userApi.getCourseofStudent(acc.studentId);
+                console.log(response);
+                _setData(response);
+            }catch(error){
+                console.log("Failed to call API data detail contact", error);
+            }
+        }
+        return takeData();
+    },[openForm])
+    const renderCourse = () => {
+        return _data.map((e) => {
+            return(
+                <option key={e.courseId} value={e.courseId}>{e.courses.name}</option>
+            )
+        })
+    }
+    const renderButtontest = (e,e1) =>{
+        if(e=='Làm bài')
+            return(
+                <td className="joinning-test" onClick={() => handleGoTest(e1)}>Đang thi</td>
+            )
+        else if (e=='Chưa được làm')
+            return(
+                <td className="not-yet-time-test">Chưa thi</td>
+            )
+        else if (e=='Đã thi')
+            return(
+                <td className="complete-test">Đã thi</td>
+            )
+        else return(
+            <td className="not-join-test">Không tham gia</td>
+        )
+    }
+    const renderColum = () =>{
+        return _list.map((e,index) => {
+            return(
+                <tr key={index}>
+                    <td scope="row">Tuần {e.week}</td>
+                    <td>(Từ {e.startDay.slice(0,10)} đến {e.finishDay.slice(0,10)})</td>
+                    <td>{(e.score===0)?"#":e.score}</td>
+                    {renderButtontest(e.status,e.testId)}
+                </tr>
+            )
+        })
     }
     return (
         <Modal
@@ -43,45 +103,21 @@ function Dialog_test() {
                 KIỂM TRA KIẾN THỨC
             </ModalHeader>
             <ModalBody>
-                <Input type="select" name="select" id="exampleSelect">
-                    <option>Ontario 01-05</option>
-                    <option>Ontario 01</option>
-                    <option>Ontario 02</option>
+                <Input type="select" name="select" id="exampleSelect" onChange={(event)=>handleChange(event)}>
+                    <option value="0">Chọn khóa học</option>
+                    {renderCourse()}
                 </Input>
                 <Table bordered>
                     <thead>
-                    <tr>
-                        <th>Tuần học</th>
-                        <th>Từ ngày - Đến ngày</th>
-                        <th>Điểm</th>
-                        <th>Trạng thái</th>
-                    </tr>
+                        <tr>
+                            <th>Tuần học</th>
+                            <th>Từ ngày - Đến ngày</th>
+                            <th>Điểm</th>
+                            <th>Trạng thái</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td scope="row">Tuần 1</td>
-                        <td>(03/05/2021-09/05/2021)</td>
-                        <td>8</td>
-                        <td className="complete-test">Đã thi</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Tuần 2</td>
-                        <td>(10/05/2021-16/05/2021)</td>
-                        <td>Không có</td>
-                        <td className="not-join-test">Không tham gia</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Tuần 3</td>
-                        <td>(17/05/2021-23/05/2021)</td>
-                        <td>9.5</td>
-                        <td className="joinning-test" onClick={() => handleGoTest()}>Đang thi</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Tuần 4</td>
-                        <td>(24/05/2021-31/05/2021)</td>
-                        <td>Chưa</td>
-                        <td className="not-yet-time-test">Chưa thi</td>
-                    </tr>
+                        {renderColum()}
                     </tbody>
                 </Table>
             </ModalBody>

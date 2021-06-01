@@ -82,9 +82,9 @@ function App() {
           <Route path="/so-lien-lac" component={() => 
                                               <ContactAccount/>
           }/>
-          <Route path="/kiem-tra" component={() => 
-                                              <TestWeek/>
-          }/>
+          <PrivateRoute path="/kiem-tra">
+            <TestWeek/>
+          </PrivateRoute>
           <Route path="/diem-danh" component={() => 
                                               <RollCall/>
           }/>
@@ -106,25 +106,26 @@ function App() {
   );
 }
 
-// function PrivateRoute({ children, ...rest }) {
-//   const postdetail = useSelector(state => state.EditPost.postDetail)
-//   return (
-//     <Route
-//       {...rest}
-//       render={({ location }) =>
-//         postdetail.postID ? (
-//           children
-//         ) : (
-//           <Redirect
-//             to={{
-//               pathname: "/",
-//               state: { from: location }
-//             }}
-//           />
-//         )
-//       }
-//     />
-//   );
-// }
+function PrivateRoute({ children, ...rest }) {
+  const testID = useSelector(state => state.Login.testID);
+  console.log(testID);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        (testID && testID!='') ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
 
 export default withTranslation()(App);

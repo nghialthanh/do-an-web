@@ -12,6 +12,7 @@ const initialState = {
         studentId: "",
         token: ""
     },
+    testID: '',
 }
 
 
@@ -22,6 +23,14 @@ const LoginReducers = (state = initialState,action) => {
             return {
                 ...state,
                 acc: newstate,
+            };
+        }
+        case 'SET-TESTID': {
+            const newstate = action.payload;
+            
+            return {
+                ...state,
+               testID: newstate,
             };
         }
         default:

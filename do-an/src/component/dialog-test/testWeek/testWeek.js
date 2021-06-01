@@ -6,11 +6,12 @@ import {
     InputGroupText,Label,Button, ModalFooter,Table
   } from 'reactstrap';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector,useDispatch} from 'react-redux';
+
 import { setShowFormTest } from "../../../redux/actions/openForm";
 import { useHistory, useLocation } from 'react-router';
 import Swal from 'sweetalert2';
+import userApi from '../../../api/userAPI';
 
 const removeClassName = (index) =>{
     document.getElementsByClassName('answer-question-item-0')[index].classList.remove('answer-chose-item');
@@ -26,7 +27,8 @@ function TestWeek() {
     const [_questionList,_setQuestionList] = useState(undefined);
     const [_listAnswer,_setListAnswer] = useState([]);
     const [_step,_setStep] = useState(1);
-    console.log(_listAnswer);
+    const testID = useSelector(state => state.Login.testID);
+    console.log(testID);
     //------------------ take question data --------------------------//
     const takeDataQues = () => {
         axios({
@@ -58,17 +60,29 @@ function TestWeek() {
         // _setListAnswer(item);
     }
     //------------------- commit handle --------------------------//
-    const handleCommit = () => {
-        Swal.fire({
-            text: "Nộp Bài thành công",
-            showConfirmButton: false,
-            icon: 'success',
-            timer: 1500,
-            timerProgressBar: true,
-            toast: true,
-            position: 'top'
-        });
-        History.push('/trang-chu');
+    const handleCommit = async() => {
+        let min=2,max=5;
+        let score=Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1) + Math.ceil(min));
+        const params = {
+            testId: testID,
+            score: score
+        }
+        try{
+            const response1 = await userApi.posttest(params);
+            console.log(response1);
+            Swal.fire({
+                text: "Nộp Bài thành công",
+                showConfirmButton: false,
+                icon: 'success',
+                timer: 1500,
+                timerProgressBar: true,
+                toast: true,
+                position: 'top'
+            });
+            History.push('/trang-chu');
+        }catch(error){
+            console.log("Failed to call API data detail contact", error);
+        }
     }
     //---------------------------- render sure for test ---------------------//
     const renderCheck = () => {
@@ -145,30 +159,6 @@ function TestWeek() {
             })
     }
     return (
-        // <Modal
-        //     modalClassName="modal-black dialog-test"
-        //     isOpen={openForm}
-        //     toggle={() => handleOpenFormTest(false)}
-        // >
-        //     <ModalHeader>
-        //         BÀI KIỂM TRA ĐẦU VÀO
-        //         <div className="ReactCountdownClock">
-        //             <ReactCountdownClock 
-        //                 seconds={60}
-        //                 color="rgb(23, 47, 72)"
-        //                 alpha={0.9}
-        //                 size={40}
-        //                 onComplete={()=>handleOpenFormTest(false)}
-        //             />
-        //         </div>
-        //     </ModalHeader>
-        //     <ModalBody>
-        //         {renderQuestion()}
-        //     </ModalBody>
-        //     <ModalFooter>
-        //         <Button>Hoàn thành</Button>
-        //     </ModalFooter>
-        // </Modal> 
         <div className="test-week">
             {renderCheck()}
         </div>

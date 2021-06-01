@@ -37,5 +37,14 @@ const userApi = {
         const url = '/api/attendance/course/attendance';
         return axiosApi.post(url, {...params});
     },
+    //------------- get test ---------------//
+    getAllTest: (id,courseid) => {
+        const url = '/api/test/all/'+id+'/'+courseid;
+        return axiosApi.get(url);
+    },
+    posttest : (params) => {
+        const url = '/api/test/exercise/submit';
+        return axiosApi.post(url, {...params});
+    },
 }
 export default userApi;

@@ -5,3 +5,9 @@ export const setLogin = (Show) => {
         payload: Show,
     }
 }
+export const setTestID = (s) => {
+    return {
+        type: 'SET-TESTID',
+        payload: s,
+    }
+}
