@@ -66,7 +66,7 @@ function Login(props) {
                 });
         }catch(error) {
             Swal.fire({
-                text: "Lỗi bạn vui lòng thử lại sau",
+                text: "Tài khoản không tồn tại",
                 showConfirmButton: false,
                 icon: 'error',
                 timer: 1500,

@@ -55,7 +55,8 @@ function Dialog_test() {
                 console.log("Failed to call API data detail contact", error);
             }
         }
-        return takeData();
+        if(acc.studentId)
+            return takeData();
     },[openForm])
     const renderCourse = () => {
         return _data.map((e) => {

@@ -1,25 +1,36 @@
 import React, { useState,useEffect } from 'react';
 import { Link,useLocation} from "react-router-dom";
 import { Button, Form,FormGroup,Input, Row } from 'reactstrap';
-import { useTranslation, withTranslation, Trans } from 'react-i18next';
+import Swal from 'sweetalert2';
+
 function FormAdmission() {
     const location= useLocation();
     const [_firstName,_setFirstName] = useState('');
     const [_lastName,_setLastName] = useState('');
     const [_mail,_setEmail] = useState('');
     const [_phone,_setPhone] = useState('');
-    const { t} = useTranslation('home');
+    const handle = () =>{
+        Swal.fire({
+            text: "Nhân viên tư vấn sẽ liên lạc với bạn trong giây lát",
+            showConfirmButton: false,
+            icon: 'warning',
+            timer: 2500,
+            timerProgressBar: true,
+            toast: true,
+            position: 'bottom-left'
+        });
+    }
     return (
         <div className="form-admission" data-aos="fade-up" id="form-adimission">
             <div className="img-form"></div>
             <div className="input-form"><div className="input-form-1">
                 <Form>
-                    <span>{t('admission')}</span>
+                    <span>Đăng ký tư vấn</span>
                     <Row>
                         <FormGroup>
                                 <Input 
                                     type="text" 
-                                    placeholder={t('firstname')} 
+                                    placeholder="Họ" 
                                     value={_firstName}
                                     onChange={(event) => _setFirstName(event.target.value)}
                                 />
@@ -27,7 +38,7 @@ function FormAdmission() {
                         <FormGroup>
                                 <Input 
                                     type="text" 
-                                    placeholder={t('lastname')} 
+                                    placeholder="Tên"
                                     value={_lastName}
                                     onChange={(event) => _setLastName(event.target.value)}
                                 />
@@ -37,7 +48,7 @@ function FormAdmission() {
                         <FormGroup>
                                 <Input 
                                     type="text" 
-                                    placeholder={t('phone')} 
+                                    placeholder="Số điện thoại" 
                                     value={_phone}
                                     onChange={(event) => _setPhone(event.target.value)}
                                 />
@@ -45,17 +56,17 @@ function FormAdmission() {
                         <FormGroup>
                                 <Input 
                                     type="text" 
-                                    placeholder={t('email')} 
+                                    placeholder="Địa chỉ email"
                                     value={_mail}
                                     onChange={(event) => _setEmail(event.target.value)}
                                 />
                         </FormGroup>
                     </Row>
-                    <Button>{t('apply')}</Button>
+                    <Button onClick={()=>handle()}>Liên hệ</Button>
                 </Form>
             </div></div>
         </div>
     );
 }
 
-export default withTranslation('home')(FormAdmission);
+export default FormAdmission;

@@ -1,5 +1,5 @@
 
-import { Route, Switch,Redirect } from "react-router-dom";
+import { Route, Switch,Redirect} from "react-router-dom";
 
 import Home from "./component/home/home"
 import { useTranslation, withTranslation, Trans } from 'react-i18next';
@@ -28,7 +28,6 @@ function App() {
   const [openChangePass,setOpenChangePass] = useState(false);
   const [roleLogin,setRoleLogin] = useState(true);// true: student --- false: giang vien
   const [openFormRegister,setOpenFormRegister] =useState(false);
-  const acc = useSelector(state => state.Login.acc);
   const dispatch = useDispatch();
   //---------- open login ---------------//
   const handleLogin = (e,e1) => {
@@ -76,18 +75,18 @@ function App() {
           <Route path="/pages" component={() => 
                                               <Home/>
           }/>
-          <Route path="/thong-tin" component={() => 
-                                              <InfoAccount/>
-          }/>
-          <Route path="/so-lien-lac" component={() => 
-                                              <ContactAccount/>
-          }/>
+          <PrivateRoute1 path="/thong-tin">
+            <InfoAccount/>
+          </PrivateRoute1>
+          <PrivateRoute2 path="/so-lien-lac">
+            <ContactAccount/>
+          </PrivateRoute2>
           <PrivateRoute path="/kiem-tra">
             <TestWeek/>
           </PrivateRoute>
-          <Route path="/diem-danh" component={() => 
-                                              <RollCall/>
-          }/>
+          <PrivateRoute3 path="/diem-danh">
+            <RollCall/>
+          </PrivateRoute3>
           <Route path="/tin-tuc/:str" component={() => 
                                               <NewsDetail/>
           }/>
@@ -105,6 +104,7 @@ function App() {
     
   );
 }
+export default withTranslation()(App);
 
 function PrivateRoute({ children, ...rest }) {
   const testID = useSelector(state => state.Login.testID);
@@ -127,5 +127,64 @@ function PrivateRoute({ children, ...rest }) {
     />
   );
 }
-
-export default withTranslation()(App);
+function PrivateRoute1({ children, ...rest }) {
+  const acc = useSelector(state => state.Login.acc);
+  console.log(acc);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        (acc.studentId || acc.userId) ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
+function PrivateRoute3({ children, ...rest }) {
+  const acc = useSelector(state => state.Login.acc);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        (acc.userId) ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
+function PrivateRoute2({ children, ...rest }) {
+  const acc = useSelector(state => state.Login.acc);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        (acc.studentId) ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}

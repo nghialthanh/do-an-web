@@ -69,7 +69,7 @@ function InfoAccount(props) {
                         </FormGroup>
                     </div>
                     <div className="footer-infor-member" onClick={()=>_setOpenForm(true)}>
-                        Đăng ký
+                        Đăng ký học
                     </div>
                 </div>}
                 <div className="info-private">

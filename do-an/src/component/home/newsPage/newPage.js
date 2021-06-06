@@ -32,7 +32,7 @@ function NewsPage() {
                 return(
                     <Link exact to={`/tin-tuc/${e.id}`}>
                     <Card key={e.id}>  
-                        <CardImg top width="100%" height="50%" src={v0} alt="Card image cap" />
+                        <CardImg top width="100%" height="50%" src={"http://englishschool.azurewebsites.net/uploads/"+e.image} alt="Card image cap" />
                         <CardBody>
                             <div className="time-news">{e.postDate.slice(0,10)}</div>
                             <CardTitle tag="h5">{e.title}</CardTitle>
@@ -50,7 +50,7 @@ function NewsPage() {
                 <div className="container-newpage">
                     <Link exact to={`/tin-tuc/${_data[0].id}`} className="main-card-newPage-elementA">
                     <Card className="main-card-newPage">  
-                        <CardImg top width="100%" height="50%" src={v0} alt="Card image cap" />
+                        <CardImg top width="100%" height="50%" src={"http://englishschool.azurewebsites.net/uploads/"+_data[0].image} alt="Card image cap" />
                         <CardBody>
                             <div className="time-news">{_data[0].postDate.slice(0,10)}</div>
                             <CardTitle tag="h5">{_data[0].title}</CardTitle>

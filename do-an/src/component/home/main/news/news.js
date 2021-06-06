@@ -20,7 +20,6 @@ function News() {
     const [_data,_setData] = useState([]);
     const takeDataNews = async() =>{
         try{      
-            console.log(1111);
             const response = await webAPI.getAllNews();
             _setData(response.concat(response));
         } catch (error){
@@ -34,10 +33,10 @@ function News() {
         return _data.map((e,index) => {
             if(index<=3)
                 return(
-                    <SwiperSlide>
+                    <SwiperSlide key={e.id}>
                     <Link exact to={`/tin-tuc/${e.id}`}>
-                    <Card key={e.id}>  
-                        <CardImg top width="100%" height="50%" src={v0} alt="Card image cap" />
+                    <Card>  
+                        <CardImg top width="100%" height="50%" src={"http://englishschool.azurewebsites.net/uploads/"+e.image} alt="Card image cap" />
                         <CardBody>
                             <div className="time-news">{e.postDate.slice(0,10)}</div>
                             <CardTitle tag="h5">{e.title}</CardTitle>

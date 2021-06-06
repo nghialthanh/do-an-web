@@ -37,12 +37,17 @@
             font-size: 18px;
             background: #fff;
             width: calc(100% / 3 - 60px);
+
             /* Center slide text vertically */
         }  
         .card{
             border-radius: 12px;
             position: relative;
             bottom: 0;
+            img{
+                width: 100%;
+                height: 230px;
+            }
             .card-body{
                 height: 50%;
                 padding: .5rem .75rem .6rem .75rem;

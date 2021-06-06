@@ -10,6 +10,7 @@ const initialState = {
         phoneNumber: "",
         sex: false,
         studentId: "",
+        userId: "",
         token: ""
     },
     testID: '',

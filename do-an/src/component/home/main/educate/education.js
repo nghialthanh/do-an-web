@@ -19,7 +19,6 @@ function Education() {
     }
     const takeDataCourse = async() =>{
         try{      
-            console.log(1111);
             const response = await webAPI.getAllCourse();
             _setData(response);
         } catch (error){

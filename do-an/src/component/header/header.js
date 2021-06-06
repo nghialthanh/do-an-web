@@ -85,15 +85,19 @@ function Header(props) {
                     </DropdownItem>
                 </DropdownMenu>
             )
-        else 
+        else if(acc.userId)
             return(
                 <DropdownMenu right>
-                    <DropdownItem href="/thong-tin">
-                        <RiAccountBoxFill/>&emsp;<span>Thông tin</span>
-                    </DropdownItem>
-                    <DropdownItem href="/diem-danh">
-                        <FaCalendarCheck/>&emsp;<span>Điểm danh</span>
-                    </DropdownItem>
+                    <Link to='/thong-tin'>
+                        <DropdownItem>
+                            <RiAccountBoxFill/>&emsp;<span>Thông tin</span>
+                        </DropdownItem>
+                    </Link>
+                    <Link to='/diem-danh'>
+                        <DropdownItem>
+                            <FaCalendarCheck/>&emsp;<span>Điểm danh</span>
+                        </DropdownItem>
+                    </Link>
                     <DropdownItem onClick={()=>props.setOpenChangePass(true)}>
                         <RiSettings3Fill/>&emsp;<span>Đổi mật khẩu</span>
                     </DropdownItem>

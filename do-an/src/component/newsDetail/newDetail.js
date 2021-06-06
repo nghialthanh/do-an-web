@@ -37,7 +37,7 @@ function NewsDetail() {
                 return(
                     <Link exact to={`/tin-tuc/${e.id}`} className="card-elementA">
                     <Card key={e.id}>  
-                        <CardImg top width="100%" src={v0} alt="Card image cap" />
+                        <CardImg top width="100%" src={"http://englishschool.azurewebsites.net/uploads/"+e.image} alt="Card image cap" />
                         <CardBody>
                             <div className="time-news">{e.postDate.slice(0,10)}</div>
                             <CardTitle tag="h5">{e.title}</CardTitle>
@@ -59,7 +59,7 @@ function NewsDetail() {
                             <div className="hr"></div>
                             <CardText>{_detail.headContent}</CardText>
                             <CardText>{_detail.bodyContent}</CardText>
-                            <CardImg top width="100%" height="40%" src={v0} alt="Card image cap" />
+                            <CardImg top width="100%" height="40%" src={"http://englishschool.azurewebsites.net/uploads/"+_detail.image} alt="Card image cap" />
                         </CardBody>
                     </Card>
                     <div className="newsdetail-list-card">

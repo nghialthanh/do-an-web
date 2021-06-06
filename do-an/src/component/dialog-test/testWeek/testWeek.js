@@ -25,21 +25,29 @@ function TestWeek() {
     const location = useLocation();
     const History = useHistory();
     const [_questionList,_setQuestionList] = useState(undefined);
-    const [_listAnswer,_setListAnswer] = useState([]);
     const [_step,_setStep] = useState(1);
+    const [_arrayQues,_setArrayQues] = useState([]);
     const testID = useSelector(state => state.Login.testID);
-    console.log(testID);
     //------------------ take question data --------------------------//
     const takeDataQues = () => {
         axios({
             method: "get",
-            url: "https://opentdb.com/api.php?amount=25&difficulty=medium&type=multiple",
+            url: "https://opentdb.com/api.php?amount=50&difficulty=medium&type=multiple",
             headers: { "Content-Type": "application/json" },
         })
             .then(function (response) {
               //handle success
-                _setQuestionList(response.data.results);
                 console.log(response);
+                const item = [];
+                for (let index = 0; index < response.data.results.length; index++) {
+                    item[index] = {
+                        answer: '',
+                        correct_answer: response.data.results[index].correct_answer
+                    }
+                }
+                console.log(item);
+                _setArrayQues(item);
+                _setQuestionList(response.data.results);
             })
             .catch(function (error) {
               //handle error
@@ -54,30 +62,34 @@ function TestWeek() {
         let css = document.getElementsByClassName('answer-question-item-'+e);
         removeClassName(index);
         css[index].classList.add('answer-chose-item');
-        // let str = "question-"+index;
-        // const item = [];
-        // item[str]=name;
-        // _setListAnswer(item);
+        console.log(name);
+        let item = _arrayQues;
+        item[index].answer = name;
+        _setArrayQues(item);
     }
     //------------------- commit handle --------------------------//
     const handleCommit = async() => {
-        let min=2,max=5;
-        let score=Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1) + Math.ceil(min));
+        console.log(_arrayQues);
+        let score = 0;
+        for (let index = 0; index < _arrayQues.length; index++) {
+            if(_arrayQues[index].answer === _arrayQues[index].correct_answer)
+                score = score+0.2;
+            
+        }
         const params = {
             testId: testID,
             score: score
         }
         try{
             const response1 = await userApi.posttest(params);
-            console.log(response1);
             Swal.fire({
-                text: "Nộp Bài thành công",
+                text: "Điểm kiểm tra tuần của bạn là "+score+",Bài kiểm tra sẽ được giảng viên sửa vào buổi học tiếp theo",
                 showConfirmButton: false,
                 icon: 'success',
-                timer: 1500,
+                timer: 3000,
                 timerProgressBar: true,
                 toast: true,
-                position: 'top'
+                position: 'bottom-left'
             });
             History.push('/trang-chu');
         }catch(error){
@@ -100,7 +112,7 @@ function TestWeek() {
                     <div className="ReactCountdownClock">
                         <h3>BÀI KIỂM TRA HẰNG TUẦN</h3>
                         <ReactCountdownClock 
-                            seconds={3600}
+                            seconds={2700}
                             color="rgb(23, 47, 72)"
                             alpha={0.9}
                             size="55"
