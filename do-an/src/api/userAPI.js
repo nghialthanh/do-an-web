@@ -46,5 +46,9 @@ const userApi = {
         const url = '/api/test/exercise/submit';
         return axiosApi.post(url, {...params});
     },
+    getQuestion: (id) => {
+        const url = '/api/test/exercise/'+id;
+        return axiosApi.get(url);
+    },
 }
 export default userApi;

@@ -89,7 +89,7 @@ function Dialog_test() {
                     <td scope="row">Tuần {e.week}</td>
                     <td>(Từ {e.startDay.slice(0,10)} đến {e.finishDay.slice(0,10)})</td>
                     <td>{(e.score===0)?"#":e.score}</td>
-                    {renderButtontest(e.status,e.testId)}
+                    {renderButtontest(e.status,e)}
                 </tr>
             )
         })

@@ -5,6 +5,7 @@ import Aos from "aos";
 import { useDispatch } from 'react-redux';
 import { setShowFormTest } from "../../redux/actions/openForm";
 
+const IntroducCenter = lazy(() => import('./IntroducCenter/introducCenter'));
 const Main = lazy(() => import('./main/main'));
 const Course = lazy(() => import('./course/course'));
 const NewPage = lazy(() => import('./newsPage/newPage'));
@@ -43,6 +44,9 @@ function Home() {
                     }/>
                     <Route path="/pages/tin-tuc" component={() => 
                                                                 <NewPage/>
+                    }/>
+                    <Route path="/pages/gioi-thieu" component={() => 
+                                                                <IntroducCenter/>
                     }/>
             </Switch>
         )

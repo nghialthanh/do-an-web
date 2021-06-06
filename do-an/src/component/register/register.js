@@ -15,7 +15,7 @@ function Register(props) {
     const [_birth,_setBirth] = useState();
     //------------------ handle login ---------------------//
     const handleLogin = () => {
-
+        props.setOpenFormRegister(false)
     }
     return (
         <Modal
@@ -27,10 +27,12 @@ function Register(props) {
                 <div className="avatar-icon">
                     <img alt="avatar" src={require("../../assets/img/avatar.png").default}/>
                 </div>
-                <span>Đăng Ký</span>
             </ModalHeader>
             <ModalBody>
-            <Form role="form">
+                <p>Hiện tại trung tâm chưa hổ trợ chức năng đăng ký online. Bạn vui lòng đến cơ sở gần nhất của TRUNG TÂM SPEAK ENGLISH
+                    để đăng ký tài khoản nhập học của SPEAK ENGLISH
+                </p>
+            {/* <Form role="form">
                     <FormGroup>
                         <Label>Họ và tên</Label>
                             <Input
@@ -86,10 +88,9 @@ function Register(props) {
                     </FormGroup> */}
                     <div className="text-center">
                         <Button type="button" onClick={() => handleLogin()}>
-                            Đăng Ký
+                            Đóng
                         </Button>
                     </div>
-                </Form>
             </ModalBody>
             
         </Modal> 

@@ -10,8 +10,17 @@ function FormAdmission() {
     const [_mail,_setEmail] = useState('');
     const [_phone,_setPhone] = useState('');
     const handle = () =>{
+        let string = "Nhân viên tư vấn sẽ liên lạc với bạn trong giây lát";
+        if(_firstName.trim()==='')
+            string="Họ và tên không được để trống";
+        else if (_lastName.trim()==='')
+            string="Họ và tên không được để trống";
+        else if (_mail.trim()==='')
+            string="email không được để trống";
+        else if (_phone.trim()==='')
+            string="Số điện thoại không được để trống"
         Swal.fire({
-            text: "Nhân viên tư vấn sẽ liên lạc với bạn trong giây lát",
+            text: string,
             showConfirmButton: false,
             icon: 'warning',
             timer: 2500,

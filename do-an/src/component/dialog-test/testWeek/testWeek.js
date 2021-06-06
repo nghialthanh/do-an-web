@@ -29,30 +29,46 @@ function TestWeek() {
     const [_arrayQues,_setArrayQues] = useState([]);
     const testID = useSelector(state => state.Login.testID);
     //------------------ take question data --------------------------//
-    const takeDataQues = () => {
-        axios({
-            method: "get",
-            url: "https://opentdb.com/api.php?amount=50&difficulty=medium&type=multiple",
-            headers: { "Content-Type": "application/json" },
-        })
-            .then(function (response) {
-              //handle success
-                console.log(response);
+    const takeDataQues = async() => {
+        try{
+            const response = await userApi.getQuestion(testID.week);
+            console.log(response);
                 const item = [];
-                for (let index = 0; index < response.data.results.length; index++) {
+                for (let index = 0; index < response.results.length; index++) {
                     item[index] = {
                         answer: '',
-                        correct_answer: response.data.results[index].correct_answer
+                        correct_answer: response.results[index].correct_answer
                     }
                 }
-                console.log(item);
-                _setArrayQues(item);
-                _setQuestionList(response.data.results);
-            })
-            .catch(function (error) {
-              //handle error
-              console.log("Failed to call API question", error);
-            });    
+            console.log(item);
+            _setArrayQues(item);
+            _setQuestionList(response.results);
+        }catch(error){
+            console.log("Failed to call API data detail contact", error);
+        }
+        // axios({
+        //     method: "get",
+        //     url: "https://opentdb.com/api.php?amount=50&difficulty=medium&type=multiple",
+        //     headers: { "Content-Type": "application/json" },
+        // })
+        //     .then(function (response) {
+        //       //handle success
+        //         console.log(response);
+        //         const item = [];
+        //         for (let index = 0; index < response.data.results.length; index++) {
+        //             item[index] = {
+        //                 answer: '',
+        //                 correct_answer: response.data.results[index].correct_answer
+        //             }
+        //         }
+        //         console.log(item);
+        //         _setArrayQues(item);
+        //         _setQuestionList(response.data.results);
+        //     })
+        //     .catch(function (error) {
+        //       //handle error
+        //       console.log("Failed to call API question", error);
+        //     });    
     }
     useEffect(()=>{
         takeDataQues();
@@ -70,16 +86,16 @@ function TestWeek() {
     //------------------- commit handle --------------------------//
     const handleCommit = async() => {
         console.log(_arrayQues);
-        let score = 0;
+        let score = 0.0;
         for (let index = 0; index < _arrayQues.length; index++) {
             if(_arrayQues[index].answer === _arrayQues[index].correct_answer)
                 score = score+0.2;
             
         }
         const params = {
-            testId: testID,
-            score: score
-        }
+            testId: testID.testId,
+            score: score.toFixed(1)
+        };
         try{
             const response1 = await userApi.posttest(params);
             Swal.fire({

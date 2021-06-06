@@ -18,12 +18,12 @@ function Footer() {
             <div className="ft footer-list">
                 <h3>Khóa Học</h3>
                 <ul>
-                    <li>>&emsp;Mẫu giáo SPEAK ENGLISH Ontario</li>
-                    <li>>&emsp;Tiếng Anh dành cho thiếu nhi</li>
-                    <li>>&emsp;Tiếng Anh dành cho thiếu niên</li>
-                    <li>>&emsp;Tiếng Anh giao tiếp dành cho người lớn</li>
-                    <li>>&emsp;TOEIC dành cho người đi làm</li>
-                    <li>>&emsp;IELTS dành cho người đi làm</li>
+                    <li>&emsp;Mẫu giáo SPEAK ENGLISH Ontario</li>
+                    <li>&emsp;Tiếng Anh dành cho thiếu nhi</li>
+                    <li>&emsp;Tiếng Anh dành cho thiếu niên</li>
+                    <li>&emsp;Tiếng Anh giao tiếp dành cho người lớn</li>
+                    <li>&emsp;TOEIC dành cho người đi làm</li>
+                    <li>&emsp;IELTS dành cho người đi làm</li>
                 </ul>
             </div>
             <div className="ft footer-contact">
@@ -31,7 +31,7 @@ function Footer() {
                 <div>
                     <p><span className="material-icons">apartment</span>&ensp;619 Lê Trọng Tấn, Quận Bình Tân</p>
                     <p><span className="material-icons">phone</span>&ensp;1900986800 - 02822479595</p>
-                    <p><span className="material-icons">mail</span>&ensp;info@wecec.edu.vn</p>
+                    <p><span className="material-icons">mail</span>&ensp;info@SPEAKENGLISH.edu.vn</p>
                     <p>TRUNG TÂM ANH NGỮ WINDSOR ESSEX CANADA</p>
                     <p>Công ty Cổ phần Phát triển Giáo dục Phúc Tấn</p>
                     <p>MST: 0315656148 do Sở Kế Hoạch Và Đầu Tư Tp.HCM cấp ngày 02/05/2019</p>

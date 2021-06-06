@@ -110,7 +110,7 @@ function Header(props) {
     return (
         <div className="header">
             <div className="header-head">
-                <div>+880166 253 232 info@domain.com</div>
+                <div>+840 935 628 946 info@speakenglish.com</div>
                 <div className="info-acc-header-head">
                     {renderLogin()}
                 </div>
@@ -136,7 +136,7 @@ function Header(props) {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink exact to="/clip/" tag={RRNavLink} activeClassName="active-nav-link">
+                        <NavLink exact to="/pages/gioi-thieu" tag={RRNavLink} activeClassName="active-nav-link">
                             Trung Tâm SPEAK ENGLISH
                         </NavLink>
                     </NavItem>
