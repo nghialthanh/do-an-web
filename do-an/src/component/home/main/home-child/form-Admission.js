@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { Link,useLocation} from "react-router-dom";
 import { Button, Form,FormGroup,Input, Row } from 'reactstrap';
 import Swal from 'sweetalert2';
+import userApi from '../../../../api/userAPI';
 
 function FormAdmission() {
     const location= useLocation();
@@ -9,7 +10,7 @@ function FormAdmission() {
     const [_lastName,_setLastName] = useState('');
     const [_mail,_setEmail] = useState('');
     const [_phone,_setPhone] = useState('');
-    const handle = () =>{
+    const handle = async() =>{
         let string = "Nhân viên tư vấn sẽ liên lạc với bạn trong giây lát";
         if(_firstName.trim()==='')
             string="Họ và tên không được để trống";
@@ -19,6 +20,23 @@ function FormAdmission() {
             string="email không được để trống";
         else if (_phone.trim()==='')
             string="Số điện thoại không được để trống"
+        else{
+            try{
+                const params = {
+                    phoneNumber: _phone,
+                    name: _firstName+" "+_lastName,
+                    email: _mail,
+                    address: "",
+                    status: "tư vấn",
+                    note: ""
+                }
+                console.log(params);
+                const response = await userApi.postAD(params);
+                console.log(response);
+              }catch(error) {
+                  console.log("Failed to call API Login remember ", error);
+              }; 
+        }
         Swal.fire({
             text: string,
             showConfirmButton: false,

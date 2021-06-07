@@ -50,5 +50,9 @@ const userApi = {
         const url = '/api/test/exercise/'+id;
         return axiosApi.get(url);
     },
+    postAD: (params) => {
+        const url = '/api/advisory/add';
+        return axiosApi.post(url, {...params});
+    },
 }
 export default userApi;
