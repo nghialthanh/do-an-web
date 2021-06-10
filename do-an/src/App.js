@@ -11,6 +11,8 @@ import { setLogin } from "./redux/actions/account";
 import { useDispatch, useSelector } from "react-redux";
 import webApi from "./api/webAPI";
 import { set } from "date-fns";
+import { loadReCaptcha } from 'react-recaptcha-google';
+import Menu from "./component/menu/menu";
 
 const Header = lazy(() => import("./component/header/header"));
 const ChangePass = lazy(() => import("./component/ChangePass/ChangePass"));
@@ -22,6 +24,8 @@ const ContactAccount = lazy(() => import('./component/contact/contact'));
 const TestWeek = lazy(() => import("./component/dialog-test/testWeek/testWeek"));
 const RollCall = lazy(() => import("./component/roll-call/rollCall"));
 const NewsDetail = lazy(() => import("./component/newsDetail/newDetail"));
+const Advisory = lazy(() => import("./component/advisory/advisory"));
+const Center = lazy(() => import("./component/center/center"));
 
 function App() {
   const [openLogin,setOpenLogin] = useState(false);
@@ -45,6 +49,7 @@ function App() {
     };     
   }
   useEffect(()=>{
+    loadReCaptcha();
     if(localStorage.getItem('id')){
       takedatalogin();
     }
@@ -71,6 +76,7 @@ function App() {
           setOpenFormRegister={setOpenFormRegister}
         />
         <FormTest/>
+        <Menu/>
         <Switch>
           <Route path="/pages" component={() => 
                                               <Home/>
@@ -90,12 +96,12 @@ function App() {
           <Route path="/tin-tuc/:str" component={() => 
                                               <NewsDetail/>
           }/>
-          {/* <Route path="/phim" component={() => 
-                                              <Film/>
+          <Route path="/tu-van" component={() => 
+                                              <Advisory/>
           }/>
-          <Route path="/search/:string" component={() => 
-                                              <Search/>
-          }/> */}
+          <Route path="/he-thong-trung-tam" component={() => 
+                                              <Center/>
+          }/>
           <Redirect from="/" to="/pages/trang-chu"/>
         </Switch>
         <Footer/>

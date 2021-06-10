@@ -31,5 +31,10 @@ const webApi = {
         const url = '/api/auth/GetInfo/'+id;
         return axiosApi.get(url);
     },
+    //--------- center -----------//
+    getCenter : () => {
+        const url = '/api/department/all';
+        return axiosApi.get(url);
+    },
 }
 export default webApi;

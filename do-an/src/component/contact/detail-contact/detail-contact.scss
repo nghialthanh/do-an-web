@@ -57,6 +57,24 @@
                 padding-left: 1.1rem;
                 padding-right: 1.1rem;
             }
+            .note-table{
+                width: 200px;
+                span{
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    color: black;
+                }
+                &:hover{
+                    cursor: pointer;
+                    span{
+                        overflow: auto;
+                        -webkit-line-clamp: auto;
+                        display: inline;
+                    }
+                }
+            }
         }
     }
     

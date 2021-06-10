@@ -6,7 +6,7 @@
 @import "../../component/register/register.scss";
 @import "../../component/login/login.scss";
 @import "../../component/ChangePass/ChangePass.scss";
-
+@import "../../component/menu/menu.scss";
 //------------------ account -----------------//
 @import "../../component/account/account.scss";
     @import "../../component/account/schedule/schedule.scss";
@@ -15,6 +15,8 @@
 @import "../../component/roll-call/rollCall.scss";
 
 @import "../../component/newsDetail/newDetail.scss";
+@import "../../component/advisory/advisory.scss";
+@import "../../component/center/center.scss";
 @import "../../component/home/home.scss";
     @import "../../component/home/IntroducCenter/introducCenter.scss";
     @import "../../component/home/course/course.scss";

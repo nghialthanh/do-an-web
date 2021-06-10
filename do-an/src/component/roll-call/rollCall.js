@@ -27,7 +27,7 @@ function RollCall(props) {
     }
     useEffect(()=>{
        return takeDataCourse();
-    },[acc.studentId])
+    },[])
     const handleRollCall = async() => {
         //------------------------//
         let d = new Date();
@@ -41,7 +41,6 @@ function RollCall(props) {
                 sess=index+1;
                 break;
             }
-
         }
         const param = {
             courseId: _course,
@@ -69,6 +68,22 @@ function RollCall(props) {
             console.log("Failed to call API roll call", error);
         }
     }
+    //------------------ handle save comment ---------------------//
+    const handleComment = (event,id) => {
+        let array=[];
+        for (let index = 0; index < _checkbox.length; index++) {
+            if(_checkbox[index].studentId==id){
+                const item1 = {
+                    ..._checkbox[index],
+                    comment: event.target.value
+                }
+                array.push(item1);
+            }
+            else
+                array.push(_checkbox[index])
+        }
+        _setCheckBox(array);
+    }
     //------------------ handle save checkbox -------------------//
     const handleSavecheckbox = (e,id) => {
         let array=[];
@@ -77,7 +92,8 @@ function RollCall(props) {
                 const item1 = {
                     studentId: id,
                     absent: e.target.checked,
-                    reason: ""  
+                    reason: "",
+                    comment: ""
                 }
                 array.push(item1);
             }
@@ -88,9 +104,8 @@ function RollCall(props) {
     }
     //-----------------------------------------------------------//
     const handleChange = async(event) => {
-        _setCourse(event);
-        
         if(event!=='0'){
+            _setCourse(event);
             let d = new Date();
             d.setDate(d.getDate() - 7);
             let result = nextMonday(d);
@@ -109,10 +124,12 @@ function RollCall(props) {
                         const element = {
                             studentId: response1[index].students.studentId,
                             absent: false,
-                            reason: ""
+                            reason: "",
+                            comment: response1[index].tests[0].comment
                         };
                         item.push(element);
                     }
+                    console.log(item);
                     _setCheckBox(item);
                     _setList(response1);
                 }
@@ -125,19 +142,26 @@ function RollCall(props) {
     const renderCourse = () => {
         return _data.map((e) => {
             return(
-                <option key={e.courses.id} value={e.courses.id}>{e.courses.name}</option>
+                <option key={e.id} value={e.id}>{e.name}</option>
             )
         })
     }
     const renderattenchild = (e1,e2) => {
+        let i = [];
+        i[-1] = 0;
         return e1.map((e,index) => {
+            if(!e)
+                i[index]= 1;
+            else i[index] = 0;
+            // if( !e && index===e1.length-1 && i[index-1]===0)
+            //     _setCheckComment(true);
             return(
                 <td className="text-center" key={index}>
                     {(e)
                         ?((e.absent)
                             ?<span className="span-CM-rollcall">Có mặt</span>
                             :<span className="span-V-rollcall">Vắng</span>)
-                        :<Input type="checkbox" value={_checkbox[index].absent} onChange={(event)=>handleSavecheckbox(event,e2)}/>}
+                        :((i[index-1]===0)?<Input type="checkbox" value={_checkbox[index].absent} onChange={(event)=>handleSavecheckbox(event,e2)}/>:<></>)}
                 </td>
             )
         })
@@ -150,7 +174,17 @@ function RollCall(props) {
                     <td>{e.students.lastName}&ensp;{e.students.firstName}</td>
                     <td className="text-center">{(e.tests[0].score=='0.0')?e.tests[0].status:e.tests[0].score}</td>
                     {renderattenchild(e.tests[0].attendances,e.students.studentId)}
-                    <td></td>
+                    {/* <td>{(_checkComment) &&  */}
+                    <td>
+                        <Input 
+                            type="textarea" 
+                            name="text" 
+                            id="exampleText" 
+                            placeholder="Nhận xét..." 
+                            value={_checkbox[index].comment}
+                            onChange={(event) => handleComment(event,e.students.studentId)}
+                        />
+                    </td>
                 </tr>
             )
         })
@@ -159,13 +193,13 @@ function RollCall(props) {
         let count=null;
         for (let index = 0; index < _data.length; index++) {
             
-            if(_data[index].courses.id==_course){
+            if(_data[index].id==_course){
                 count=_data[index];
                 break;
             }
         }
         if(count!==null)
-            return count.courses.schedules.map((e,index) => {
+            return count.schedules.map((e,index) => {
                     return(
                         <th key={index} className="text-center">{e.timeStart} - {e.day}</th>
                     )
@@ -192,7 +226,7 @@ function RollCall(props) {
                                 <th className="text-center">Họ và tên đệm</th>
                                 <th className="text-center">Điểm</th>
                                 {renderColum()}
-                                <th className="text-center">Ghi chú</th>
+                                <th className="text-center">Nhận xét tuần</th>
                             </tr>
                         </thead>
                         <tbody>

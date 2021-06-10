@@ -61,6 +61,10 @@ function Course() {
                 </div>
             }
             </div>
+            <div className="procedure">
+                <h3>Lộ trình học</h3>
+                <img src={require("../../../assets/img/kh.jpg").default} alt='...'></img>
+            </div>
             <Employee/>
         </>
     );

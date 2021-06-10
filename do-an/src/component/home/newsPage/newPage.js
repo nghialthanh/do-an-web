@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 
 import {setcourse} from '../../../redux/actions/course';
 import webAPI from '../../../api/webAPI';
-import v0 from '../../../assets/img/uu-dai-he.jpg';
 import Loading from '../../loading';
 
 function NewsPage() {

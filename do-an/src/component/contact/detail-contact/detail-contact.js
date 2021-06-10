@@ -26,8 +26,8 @@ function DetailContact() {
     },[acc.studentId])
     //-----------------------------------------------------------//
     const handleChange = async(event) => {
-        _setCourse(event.target.value);
         if(event.target.value!=='0'){
+            _setCourse(event.target.value);
             try{
                 const response1 = await userApi.getRollCallStudent(acc.studentId ,event.target.value);
                 console.log(response1);
@@ -55,7 +55,7 @@ function DetailContact() {
                     <td className="text-center">({e.startDay.slice(0,10)}) đến ({e.finishDay.slice(0,10)})</td>
                     <td className="text-center">{(e.score!==0)?e.score:e.status}</td>
                     {renderattenchild(e.attendances)}
-                    <td></td>
+                    <td className="note-table"><span>{(e.comment) && e.comment}</span></td>
                 </tr>
             )
         })

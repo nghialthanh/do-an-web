@@ -55,6 +55,7 @@ function Education() {
                     <div className="education-list-card">
                         {renderCard()}
                     </div>
+                    <Link className="link-all" exact to="/pages/khoa-hoc" >Xem tất cả</Link>
                 </div>
             }
         </div>

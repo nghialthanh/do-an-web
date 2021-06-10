@@ -28,11 +28,13 @@
                     width: 100%;
                     text-align: center;
                     margin-bottom: 3rem;
+                    color: $color-weith;
                 }
                 h5{
                     margin-top: 1rem;
                     width: 100%;
                     text-align: center;
+                    color: $color-weith;
                 }
                 .additional-CourseDetail{
                     width: 100%;
@@ -44,9 +46,28 @@
                         width: 22%;
                         display: flex;
                         align-items: center;
+                        strong{
+                            color:$color-weith;
+                        }
                     }
                 }
-                
+                a{
+                    width: 100%;
+                    height: 40px;
+                    border: 1px solid $color-weith;
+                    background-color: $color-weith;
+                    color: white;
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-weight: 500;
+                    &:hover{
+                        color: $color-weith;
+                        background-color: transparent;
+                        text-decoration: none;
+                    }
+                }
             }
             .img-intro{
                 width: 40%;

@@ -3,15 +3,47 @@
     height: auto;
     padding-top: 120px;
     .brandcam{
-        width: 100%;
-        height: 500px;
-        background-image: url('../../assets/img/banner-main.webp');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
+        width: 100vw;
+        height: 480px;
+        position: relative;
         display: flex;
         align-items: center;
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+          }
+          
+          .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+          
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+          }
+          
+          .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
         .container{
+            position: absolute;
+            left: 10%;
+            top: 110px;
+            z-index: 99;
             h3{
                 font-size: 3rem;
                 color: #234262;
@@ -23,27 +55,17 @@
                 height: 60px;
                 margin-right: 1.5rem;
                 margin-top: 1.5rem;
+                font-size: 1.1rem;
                 font-weight: 600;
-            }
-            button:nth-child(2){
-                background-color: #1fc2d9;
-                border-color: #1fc2d9;
-            }
-            button:nth-child(2):hover{
-                color: #1fc2d9;
-                background-color: white;
-                border-color: #1fc2d9;
-            }
-            button:nth-child(3){
-                background-color: white;
-                border-color: #77899d;
-                color: #77899d;
-            }
-            button:nth-child(3):hover{
+                border: 2px solid $color-weith;
                 color: white;
-                background-color: #77899d;
-                border-color: #77899d;
+                background-color: $color-weith;
             }
+            button:hover{
+                color: $color-weith;
+                background-color: transparent;
+            }
+
             button:focus{
                 -webkit-box-shadow: none;
                 box-shadow: none;

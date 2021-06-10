@@ -4,6 +4,11 @@ import { Container, ListGroup, ListGroupItem,Button, Row, Col } from 'reactstrap
 import Aos from "aos";
 import { useDispatch } from 'react-redux';
 import { setShowFormTest } from "../../redux/actions/openForm";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.min.css";
+import SwiperCore, {
+    Autoplay
+} from 'swiper/core';
 
 const IntroducCenter = lazy(() => import('./IntroducCenter/introducCenter'));
 const Main = lazy(() => import('./main/main'));
@@ -16,16 +21,11 @@ const Method = lazy(() => import('./courseDetail/method/method'));
 
 function Home() {
     const location= useLocation();
-    const dispatch = useDispatch();
+    SwiperCore.use([Autoplay]);
     useEffect(()=>{
         Aos.init({duration: 1000});
         window.scrollTo(0,0);
     },[location]);
-    //------------------ handle open form test -------------------------//
-    const handleOpenFormTest = () =>{
-        const action = setShowFormTest(true);
-        dispatch(action);
-    }
     //-------------- render page ------------------------//
     const renderPage = () => {
         return(
@@ -54,10 +54,17 @@ function Home() {
     return (
         <div className="home">
             <div className="brandcam">
+                <Swiper  className="mySwiper" autoplay={{
+                    "delay": 5000,
+                    "disableOnInteraction": false
+                }}>
+                    <SwiperSlide><img src={require("../../assets/img/banner-main.webp").default} alt='...'></img></SwiperSlide>
+                    <SwiperSlide><img src={require("../../assets/img/banner-danhsachkhoahoc.jpg").default} alt='...'></img></SwiperSlide>
+                    <SwiperSlide><img src={require("../../assets/img/banner-tuyendung.jpg").default} alt='...'></img></SwiperSlide>
+                </Swiper>
                 <Container>
                     <h3>Nâng cao kỹ năng của bạn<br/>với 1 cách học tập<br/>hoàn toàn mới</h3>
-                    <Button onClick={() => handleOpenFormTest()}>Bắt đầu</Button>
-                    <Button>Xem chi tiết</Button>
+                    <Link exact to="/tu-van"><Button>Bắt đầu</Button></Link>
                 </Container>
             </div>
             <Container className="ads-quality">

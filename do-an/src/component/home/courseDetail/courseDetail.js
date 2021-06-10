@@ -40,6 +40,7 @@ function CourseDetail() {
                         <div><strong>Ngày chiêu sinh:</strong></div>
                         <div>&ensp;{course.theOpeningDay.slice(0,10)}</div>
                     </div><br/>
+                    <Link exact to="/tu-van">Đăng ký khóa học</Link>
                 </div>}
                 <div className="img-intro">
                     <img src={require('../../../assets/img/chtrinh-daotao.png').default} alt='...'></img>

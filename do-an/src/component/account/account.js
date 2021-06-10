@@ -68,7 +68,21 @@ function InfoAccount(props) {
                             {rendernotLearn()}
                         </FormGroup>
                     </div>
-                    <div className="footer-infor-member" onClick={()=>_setOpenForm(true)}>
+                    <div 
+                        className="footer-infor-member" 
+                        // onClick={()=>_setOpenForm(true)}>
+                        onClick={() =>
+                            Swal.fire({
+                                text: "Tính năng đang phát triển",
+                                showConfirmButton: false,
+                                icon: 'warning',
+                                timer: 1500,
+                                timerProgressBar: true,
+                                toast: true,
+                                position: 'bottom-left'
+                            })
+                        }
+                    >
                         Đăng ký học
                     </div>
                 </div>}

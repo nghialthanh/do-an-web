@@ -26,6 +26,7 @@
         font-weight: 700;
         margin-bottom: 3rem;
         font-family: $font-family-main;
+        color: $color-weith;
     }
     .course-list-card{
         display: flex;
@@ -130,4 +131,23 @@
         }
     }
     
+}
+.procedure{
+    width: 100vw;
+    height: 950px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5rem;
+    h3{
+        font-size: 40px;
+        color: $color-weith;
+        font-family: $font-family-main;
+        font-weight: 600;
+    }
+    img{
+        width: 100%;
+        height: 100%;
+    }
 }

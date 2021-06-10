@@ -37,7 +37,7 @@ function Schedule(props) {
                 <tr>
                     <td>{e.courses.name}</td>
                     <td>{renderschedule(e.courses.schedules)}</td>
-                    <td>{e.courses.theOpeningDay.slice(0,10)}</td>
+                    <td>{e.theOpeningDay.slice(0,10)}</td>
                     <td>Đang dạy</td>
                 </tr>
             )
