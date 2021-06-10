@@ -20,8 +20,7 @@ const center = {
 const Map = (props) => {
     // const [selected, setSelected] = useState(null);
     const { isLoaded, loadError } = useLoadScript({
-        // googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-        googleMapsApiKey: "AIzaSyAdueAQZitlzpLSz5l2d6LBWHuJdwYbnuc",
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
     });
     const [markers, setMarkers] = useState([]);
@@ -56,8 +55,7 @@ const Map = (props) => {
     }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
-    // Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
-    Geocode.setApiKey("AIzaSyAdueAQZitlzpLSz5l2d6LBWHuJdwYbnuc");
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
     return (
         <div className="mapsgg">
             <GoogleMap
