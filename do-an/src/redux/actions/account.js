@@ -11,3 +11,9 @@ export const setTestID = (s) => {
         payload: s,
     }
 }
+export const setArrayQues= (s) => {
+    return {
+        type: 'SET-ARRAY-QUESTION',
+        payload: s,
+    }
+}

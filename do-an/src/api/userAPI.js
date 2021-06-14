@@ -4,7 +4,7 @@ import axiosApi from "./Config";
 const userApi = {
     //---------- get course of studenid --------//
     getCourseofStudent : (id) => {
-        const url = '/api/CourseDetail/all/course/'+id;
+        const url = '/api/class/All/info/'+id;
         return axiosApi.get(url);
     },
     getCourseofTeacher : (id) => {
@@ -12,12 +12,12 @@ const userApi = {
         return axiosApi.get(url);
     },
     getCourseNotLearn: (id) => {
-        const url = '/api/course/All/'+id+'/noregister';
+        const url = '/api/class/All/'+id+'/noregister';
         return axiosApi.get(url);
     },
     //------------ get roll-call student -----------//
     getRollCallStudent: (id,courseid) => {
-        const url = '/api/parent/manage/'+id+'/'+courseid;
+        const url = '/api/student/manage/'+id+'/'+courseid;
         return axiosApi.get(url);
     },
     //------------ Change Pass --------------------//

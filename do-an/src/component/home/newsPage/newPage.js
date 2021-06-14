@@ -15,8 +15,8 @@ function NewsPage() {
     const [_data,_setData] = useState([]);
     const takeDataNews = async() =>{
         try{      
-            console.log(1111);
             const response = await webAPI.getAllNews();
+            console.log(response);
             _setData(response);
         } catch (error){
               console.log("Failed to call API get info user profile",error);

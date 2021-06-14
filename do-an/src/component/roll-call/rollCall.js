@@ -6,7 +6,8 @@ import {
     InputGroupText,Label,Button, CustomInput, Col, Table
   } from 'reactstrap';
 import { nextMonday } from 'date-fns'
-
+import { FaCheckSquare } from "react-icons/fa";
+import { BsSquare } from "react-icons/bs";
 import userApi from '../../api/userAPI';
 import Swal from 'sweetalert2';
 
@@ -118,7 +119,7 @@ function RollCall(props) {
             try{
                 const response1 = await userApi.getRollCallteacher(param);
                 console.log(response1);
-                if(response1[0].students){
+                if(response1[0]){
                     let item = [];
                     for (let index = 0; index < response1.length; index++) {
                         const element = {
@@ -181,7 +182,7 @@ function RollCall(props) {
                             name="text" 
                             id="exampleText" 
                             placeholder="Nhận xét..." 
-                            value={_checkbox[index].comment}
+                            value={(_checkbox[index].comment)?_checkbox[index].comment:""}
                             onChange={(event) => handleComment(event,e.students.studentId)}
                         />
                     </td>
@@ -217,9 +218,13 @@ function RollCall(props) {
                         <option value="0">Chọn khóa học</option>
                         {renderCourse()}
                     </Input>
+                    <div>
+                        <div><FaCheckSquare/>&ensp;Có mặt</div>
+                        <div><BsSquare/>&ensp;Vắng mặt</div>
+                    </div>
                 </div>
                 <div className="body-detail-rollcall">
-                    <Table bordered>
+                    {(_list.length!==0)?<Table bordered>
                         <thead>
                             <tr>
                                 <th className="text-center">STT</th>
@@ -232,7 +237,7 @@ function RollCall(props) {
                         <tbody>
                             {renderList()}
                         </tbody>
-                    </Table>
+                    </Table>:<h5 style={{marginTop: "30px",marginLeft: "40%"}}>Lớp không có học viên</h5>}
                 </div>
                 {(_list.length!==0) &&<div className="footer-detail-rollcall d-flex">
                     <Button color="info" onClick={()=>handleRollCall()}>Điểm danh</Button>

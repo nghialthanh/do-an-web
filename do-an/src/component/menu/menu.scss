@@ -1,16 +1,16 @@
 @keyframes example {
-    0%   {right: -180px}
+    0%   {right: -170px}
     100% {right: 0}
 }
 @keyframes example1 {
     0% {right: 0}
-    100%   {right: -180px}
+    100%   {right: -170px}
 }
 .menu-mini{
     display: flex;
     flex-direction: column;
     width: 230px;
-    height: 150px;
+    height: 170px;
     background: $color-weith-opacity;
     position: fixed;
     top:40%;
@@ -19,7 +19,7 @@
     overflow: hidden;
     animation-name: example1;
     animation-duration: .25s;
-    animation-fill-mode: both;
+    animation-fill-mode: forwards;
     a{
         display: flex;
         flex-direction: row;
@@ -31,13 +31,13 @@
         font-family: Asap,sans-serif;
         font-weight: 500;
         div{
-            width: 50px;
+            width: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: .25rem;
             svg{
-                font-size: 23px;
+                font-size: 25px;
                 font-weight: 600;
             }
         }

@@ -37,7 +37,7 @@ function Header(props) {
             return(
                 <UncontrolledDropdown>
                     <DropdownToggle nav caret tag="span">
-                        Chào, {acc.firstName}
+                        Chào, {acc.lastName}
                     </DropdownToggle>
                     {renderMenu()}
                 </UncontrolledDropdown>
@@ -75,7 +75,7 @@ function Header(props) {
                         </DropdownItem>
                     </Link>
                     <DropdownItem onClick={() => handleOpenFormTest()}>
-                        <GiOpenBook/>&emsp;<span>Kiểm tra </span>
+                        <GiOpenBook/>&emsp;<span>Làm bài tập</span>
                     </DropdownItem>
                     <DropdownItem onClick={()=>props.setOpenChangePass(true)}>
                         <RiSettings3Fill/>&emsp;<span>Đổi mật khẩu</span>

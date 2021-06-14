@@ -44,7 +44,7 @@ function DetailContact() {
     const renderCourse = () => {
         return _data.map((e) => {
             return(
-                <option key={e.courseId} value={e.courseId}>{e.courses.name}</option>
+                <option key={e.classes.id} value={e.classes.id}>{e.classes.name}</option>
             )
         })
     }
@@ -61,9 +61,9 @@ function DetailContact() {
         })
     }
     const renderattenchild = (e1) => {
-        return e1.map((e) => {
+        return e1.map((e,index) => {
             return(
-                <td className="text-center">
+                <td className="text-center" key={index}>
                     {(e)
                         ?((e.absent)
                             ?<span className="span-CM-rollcall">Có mặt</span>
@@ -76,13 +76,13 @@ function DetailContact() {
     const renderColum = () => {
         let count;
         for (let index = 0; index < _data.length; index++) {
-            if(_data[index].courseId==_course){
+            if(_data[index].classes.id==_course){
                 count=_data[index];
                 break;
             }
         }
-        if(count.courses)
-            return count.courses.schedules.map((e,index) => {
+        if(count.classes.id)
+            return count.classes.schedules.map((e,index) => {
                     return(
                         <th key={index} className="text-center">{e.timeStart} - {e.day}</th>
                     )

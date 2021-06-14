@@ -1,14 +1,9 @@
 
-import React, { useState,useRef,useEffect, lazy } from 'react';
+import React, { useState,useEffect} from 'react';
 import ReactCountdownClock from "react-countdown-clock";
-import {
-    Modal, ModalBody, ModalHeader,Form,FormGroup,InputGroup,Input,InputGroupAddon,
-    InputGroupText,Label,Button, ModalFooter,Table
-  } from 'reactstrap';
-import axios from 'axios';
 import { useSelector,useDispatch} from 'react-redux';
 
-import { setShowFormTest } from "../../../redux/actions/openForm";
+import { setArrayQues } from "../../../redux/actions/account";
 import { useHistory, useLocation } from 'react-router';
 import Swal from 'sweetalert2';
 import userApi from '../../../api/userAPI';
@@ -22,7 +17,6 @@ const removeClassName = (index) =>{
 
 function TestWeek() {
     const dispatch = useDispatch();
-    const location = useLocation();
     const History = useHistory();
     const [_questionList,_setQuestionList] = useState(undefined);
     const [_step,_setStep] = useState(1);
@@ -37,7 +31,8 @@ function TestWeek() {
                 for (let index = 0; index < response.results.length; index++) {
                     item[index] = {
                         answer: '',
-                        correct_answer: response.results[index].correct_answer
+                        correct_answer: response.results[index].correct_answer,
+                        question: `Question ${index+1}: ${response.results[index].question}`
                     }
                 }
             console.log(item);
@@ -45,30 +40,7 @@ function TestWeek() {
             _setQuestionList(response.results);
         }catch(error){
             console.log("Failed to call API data detail contact", error);
-        }
-        // axios({
-        //     method: "get",
-        //     url: "https://opentdb.com/api.php?amount=50&difficulty=medium&type=multiple",
-        //     headers: { "Content-Type": "application/json" },
-        // })
-        //     .then(function (response) {
-        //       //handle success
-        //         console.log(response);
-        //         const item = [];
-        //         for (let index = 0; index < response.data.results.length; index++) {
-        //             item[index] = {
-        //                 answer: '',
-        //                 correct_answer: response.data.results[index].correct_answer
-        //             }
-        //         }
-        //         console.log(item);
-        //         _setArrayQues(item);
-        //         _setQuestionList(response.data.results);
-        //     })
-        //     .catch(function (error) {
-        //       //handle error
-        //       console.log("Failed to call API question", error);
-        //     });    
+        }   
     }
     useEffect(()=>{
         takeDataQues();
@@ -78,7 +50,6 @@ function TestWeek() {
         let css = document.getElementsByClassName('answer-question-item-'+e);
         removeClassName(index);
         css[index].classList.add('answer-chose-item');
-        console.log(name);
         let item = _arrayQues;
         item[index].answer = name;
         _setArrayQues(item);
@@ -98,8 +69,10 @@ function TestWeek() {
         };
         try{
             const response1 = await userApi.posttest(params);
+            const action = setArrayQues(_arrayQues);
+            dispatch(action);
             Swal.fire({
-                text: "Điểm kiểm tra tuần của bạn là "+score+",Bài kiểm tra sẽ được giảng viên sửa vào buổi học tiếp theo",
+                text: "Nộp bài thành công",
                 showConfirmButton: false,
                 icon: 'success',
                 timer: 3000,
@@ -107,7 +80,7 @@ function TestWeek() {
                 toast: true,
                 position: 'bottom-left'
             });
-            History.push('/trang-chu');
+            History.push('/sua-bai-tap-ve-nha');
         }catch(error){
             console.log("Failed to call API data detail contact", error);
         }
@@ -117,7 +90,7 @@ function TestWeek() {
         if(_step===1)
             return(
                 <div className="sure-for-test">
-                    <h3>Bắt đầu làm bài kiểm tra tuần</h3>
+                    <h3>Bắt đầu làm bài tập hằng tuần</h3>
                     <button onClick={() =>_setStep(2)}>Bắt đầu</button>
                 </div>
             )
@@ -126,13 +99,13 @@ function TestWeek() {
                 <div className="test-week-content">
                     
                     <div className="ReactCountdownClock">
-                        <h3>BÀI KIỂM TRA HẰNG TUẦN</h3>
+                        <h3>BÀI TẬP HẰNG TUẦN</h3>
                         <ReactCountdownClock 
                             seconds={2700}
                             color="rgb(23, 47, 72)"
                             alpha={0.9}
                             size="55"
-                            // onComplete={()=>handleOpenFormTest(false)}
+                            onComplete={()=> handleCommit()}
                         />
                     </div>
                     {renderQuestion()}

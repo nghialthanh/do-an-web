@@ -24,8 +24,8 @@ function Schedule(props) {
             return props._data.map((e) => {
                 return(
                     <tr>
-                        <td>{e.courses.name}</td>
-                        <td>{renderschedule(e.courses.schedules)}</td>
+                        <td>{e.classes.name}</td>
+                        <td>{renderschedule(e.classes.schedules)}</td>
                         <td>{e.dayStart.slice(0,10)}</td>
                         <td>{e.dayFinish.slice(0,10)}</td>
                         <td>{(e.finish)?"Đã hoàn thành":"Đang học"}</td>
@@ -35,9 +35,10 @@ function Schedule(props) {
         else return props._data.map((e) => {
             return(
                 <tr>
-                    <td>{e.courses.name}</td>
-                    <td>{renderschedule(e.courses.schedules)}</td>
-                    <td>{e.theOpeningDay.slice(0,10)}</td>
+                    <td>{e.name}</td>
+                    <td>{renderschedule(e.schedules)}</td>
+                    <td>{e.departments.name}</td>
+                    <td>{e.courses.theOpeningDay.slice(0,10)}</td>
                     <td>Đang dạy</td>
                 </tr>
             )
@@ -61,6 +62,7 @@ function Schedule(props) {
                         :<tr>
                             <th>Tên lớp</th>
                             <th>Ngày dạy</th>
+                            <th>Trung tâm</th>
                             <th>Ngày khai giảng</th>
                             <th>Trạng thái</th>
                         </tr>

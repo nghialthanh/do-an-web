@@ -1,0 +1,125 @@
+.check-week{
+    padding:140px 8rem 140px 8rem;
+    .test-week-content{
+        border: 1px solid $color-weith-opacity;
+        padding: 1.5rem;
+        border-radius: 15px;
+        .header-check-week{
+            border: 1px solid $color;
+            display: flex;
+            border-radius: 15px;
+            flex-direction: row;
+            width: 95%;
+            margin-left: 2.5%;
+            height: 130px;
+            margin-bottom: 1rem;
+            .score-check-week{
+                width: 15%;
+                border-right: 1px solid $color;
+                .score-header{
+                    border-bottom: 1px solid $color;
+                    font-weight: 700;
+                    font-size: 1.3rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $color;
+                }
+                span{
+                    width: 100%;
+                    height: calc(130px - 1.6rem);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-decoration: underline;
+                    text-decoration-thickness: 2px;
+                    font-family: cursive;
+                    font-style: oblique;
+                    font-size: 3rem;
+                    color: red;
+                }
+            }
+            .detail-check-week{
+                width: 85%;
+                .header-detail-check-week{
+                    border-bottom: 1px solid $color;
+                    font-weight: 700;
+                    font-size: 1.3rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $color;
+                }
+                .body-detail-check-week{
+                    padding: 1.5rem;
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+                    span{
+                        width: 50%;
+                        height: 30px;
+                    }
+                }
+            }
+        }
+        .question-item{
+            .header-question-item{
+                font-size: 1rem;
+                padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+                span{
+                    font-weight: 700;
+                }
+                .right-answer{
+                    color: #1e9f4e;
+                }
+                .wrong-answer{
+                    color: red;
+                }
+            }
+            
+            .answer-question-item{
+                display: flex;
+                flex-direction: row;
+                .row-answer-question-item{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+                    width: 100%;
+                    .item-answer-question-item{
+                        padding: 0.5rem 2rem 0.5rem 2rem;
+                        span{
+                            width: auto;
+                        }
+                    }
+                }
+                
+            }
+        }
+        .out-check-test{
+            width: 100%;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            a{
+                bottom: 0;
+                width: 80%;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                font-weight: 600;
+                font-size: 18px;
+                background-color: $color-weith-opacity;
+                border-radius: 15px;
+                border: 1px solid $color-weith-opacity;
+                &:hover{
+                    background-color: transparent;
+                    color:$color-weith-opacity;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

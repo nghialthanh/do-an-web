@@ -22,6 +22,7 @@ const InfoAccount = lazy(() => import('./component/account/account'));
 const FormTest = lazy(() => import("./component/dialog-test/dialog-test"));
 const ContactAccount = lazy(() => import('./component/contact/contact'));
 const TestWeek = lazy(() => import("./component/dialog-test/testWeek/testWeek"));
+const CheckTest = lazy(() => import("./component/dialog-test/checkTest/checkTest"));
 const RollCall = lazy(() => import("./component/roll-call/rollCall"));
 const NewsDetail = lazy(() => import("./component/newsDetail/newDetail"));
 const Advisory = lazy(() => import("./component/advisory/advisory"));
@@ -87,9 +88,12 @@ function App() {
           <PrivateRoute2 path="/so-lien-lac">
             <ContactAccount/>
           </PrivateRoute2>
-          <PrivateRoute path="/kiem-tra">
+          <PrivateRoute path="/bai-tap-ve-nha">
             <TestWeek/>
           </PrivateRoute>
+          <PrivateRouteCheckTest path="/sua-bai-tap-ve-nha">
+            <CheckTest/>
+          </PrivateRouteCheckTest>
           <PrivateRoute3 path="/diem-danh">
             <RollCall/>
           </PrivateRoute3>
@@ -120,6 +124,26 @@ function PrivateRoute({ children, ...rest }) {
       {...rest}
       render={({ location }) =>
         (testID!='') ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
+function PrivateRouteCheckTest({ children, ...rest }) {
+  const arrayQues = useSelector(state => state.Login.arrayQues);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        (arrayQues.length!==0) ? (
           children
         ) : (
           <Redirect

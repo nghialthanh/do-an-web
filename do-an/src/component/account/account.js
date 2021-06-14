@@ -32,7 +32,8 @@ function InfoAccount(props) {
                 _setDataNotlearn(response[1]);
             }
             else{
-                const response = await userApi.getCourseofTeacher(acc.userId);
+                // const response = await userApi.getCourseofTeacher(acc.userId);
+                const response = await userApi.getCourseofStudent(acc.userId);
                 console.log(response)
                 _setData(response);
             }

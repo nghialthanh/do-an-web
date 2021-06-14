@@ -19,6 +19,7 @@ function Dialog_test() {
     const dispatch = useDispatch();
     const History = useHistory();
     const [_data,_setData] = useState([]);
+    const [_name,_setName] = useState('');
     const [_list, _setList] = useState([]);
     //------------------ handle open form test -------------------------//
     const handleOpenFormTest = (e) =>{
@@ -27,19 +28,30 @@ function Dialog_test() {
     }
     //------------------ handle go test-------------------------//
     const handleGoTest = (e1) =>{
-        console.log(e1);
-        const action1 = setTestID(e1);
+        const item = {
+            ...e1,
+            nameClass: _name
+        }
+        console.log(item);
+        const action1 = setTestID(item);
         dispatch(action1);
         const action = setShowFormTest(false);
         dispatch(action);
-        History.push('/kiem-tra');
+        History.push('/bai-tap-ve-nha');
     }
     const handleChange = async(event) => {
+        console.log(event.target.value);
+        for (let index = 0; index < _data.length; index++) {
+            if(_data[index].classes.id==event.target.value){
+                _setName(_data[index].classes.name);
+                break;
+            }
+        }
         if(event.target.value!=='0'){
             try{
                 const response1 = await userApi.getAllTest(acc.studentId ,event.target.value);
                 console.log(response1);
-                    _setList(response1);
+                _setList(response1);
             }catch(error){
                 console.log("Failed to call API data detail contact", error);
             }
@@ -50,7 +62,7 @@ function Dialog_test() {
             try{
                 const response = await userApi.getCourseofStudent(acc.studentId);
                 console.log(response);
-                _setData(response);
+                _setData(response); 
             }catch(error){
                 console.log("Failed to call API data detail contact", error);
             }
@@ -61,22 +73,22 @@ function Dialog_test() {
     const renderCourse = () => {
         return _data.map((e) => {
             return(
-                <option key={e.courseId} value={e.courseId}>{e.courses.name}</option>
+                <option key={e.classes.id} value={e.classes.id}>{e.classes.name}</option>
             )
         })
     }
     const renderButtontest = (e,e1) =>{
         if(e=='Làm bài')
             return(
-                <td className="joinning-test" onClick={() => handleGoTest(e1)}>Đang thi</td>
+                <td className="joinning-test" onClick={() => handleGoTest(e1)}>Đang mở</td>
             )
         else if (e=='Chưa được làm')
             return(
-                <td className="not-yet-time-test">Chưa thi</td>
+                <td className="not-yet-time-test">Chưa mở</td>
             )
         else if (e=='Đã thi')
             return(
-                <td className="complete-test">Đã thi</td>
+                <td className="complete-test">Đã làm</td>
             )
         else return(
             <td className="not-join-test">Không tham gia</td>
@@ -101,7 +113,7 @@ function Dialog_test() {
             toggle={() => handleOpenFormTest(false)}
         >
             <ModalHeader>
-                KIỂM TRA KIẾN THỨC
+                BÀI TẬP KIỂM TRA KIẾN THỨC
             </ModalHeader>
             <ModalBody>
                 <Input type="select" name="select" id="exampleSelect" onChange={(event)=>handleChange(event)}>

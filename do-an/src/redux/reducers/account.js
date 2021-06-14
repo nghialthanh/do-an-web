@@ -14,6 +14,7 @@ const initialState = {
         token: ""
     },
     testID: '',
+    arrayQues: [],
 }
 
 
@@ -28,10 +29,16 @@ const LoginReducers = (state = initialState,action) => {
         }
         case 'SET-TESTID': {
             const newstate = action.payload;
-            
             return {
                 ...state,
                testID: newstate,
+            };
+        }
+        case 'SET-ARRAY-QUESTION': {
+            const newstate = action.payload;
+            return {
+                ...state,
+               arrayQues: newstate,
             };
         }
         default:
